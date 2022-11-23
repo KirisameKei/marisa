@@ -62,11 +62,6 @@ def login():
 
 def get_score():
     try:
-        now = datetime.date.today()
-        start_time = datetime.date(2022, 11, 22)
-        if now < start_time:
-            return
-
         url = "https://seichi-game-data.public-gigantic-api.seichi.click/prometheus_v2_metrics"
         try:
             res = requests.get(url, timeout=(6.0, 24.0))
