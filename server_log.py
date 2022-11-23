@@ -4,6 +4,7 @@ import json
 
 import discord
 import requests
+import PIL
 from PIL import Image
 
 async def server_log_on_message(client1, message):
@@ -28,7 +29,10 @@ async def server_log_on_message(client1, message):
             res = requests.get(message.attachments[0].url)
             image = io.BytesIO(res.content)
             image.seek(0)
-            image = Image.open(image)
+            try:
+                image = Image.open(image)
+            except PIL.UnidentifiedImageError:
+                return
             image.save("attachment.png")
             f = discord.File("attachment.png", filename="attachment.png")
             message_embed.set_image(url="attachment://attachment.png")
