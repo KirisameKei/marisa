@@ -628,7 +628,10 @@ async def check_mcid_exist_now(client1):
         for mcid in user_data_dict[user_id]["mcid"]:
             cursor.execute(f"select uuid from uuids where mcid='{mcid}'")
             result = cursor.fetchall()
-            uuid = result[0][0]
+            try:
+                uuid = result[0][0]
+            except IndexError: #IndexErrorが出る=今週のMCID変更者はいない
+                return
 
             url = f"https://sessionserver.mojang.com/session/minecraft/profile/{uuid}"
             try:
