@@ -110,7 +110,7 @@ async def ranking(message, command):
             if i >= page * 20:
                 break
             member = message.guild.get_member(int(key))
-            point = value["point"]
+            point = value[operation]
             if member is None:
                 description += f"{i+1}位: None: {point}\n"
             else:
