@@ -419,8 +419,106 @@ async def total_build(message, command):
         level = 49
     elif total_build_score < 153000:
         level = 50
+    elif total_build_score < 163000:
+        level = 51
+    elif total_build_score < 174000:
+        level = 52
+    elif total_build_score < 185000:
+        level = 53
+    elif total_build_score < 196000:
+        level = 54
+    elif total_build_score < 208000:
+        level = 55
+    elif total_build_score < 220000:
+        level = 56
+    elif total_build_score < 232000:
+        level = 57
+    elif total_build_score < 245000:
+        level = 58
+    elif total_build_score < 258000:
+        level = 59
+    elif total_build_score < 271000:
+        level = 60
+    elif total_build_score < 285000:
+        level = 61
+    elif total_build_score < 299000:
+        level = 62
+    elif total_build_score < 313000:
+        level = 63
+    elif total_build_score < 328000:
+        level = 64
+    elif total_build_score < 343000:
+        level = 65
+    elif total_build_score < 358000:
+        level = 66
+    elif total_build_score < 374000:
+        level = 67
+    elif total_build_score < 390000:
+        level = 68
+    elif total_build_score < 406000:
+        level = 69
+    elif total_build_score < 432000:
+        level = 70
+    elif total_build_score < 440000:
+        level = 71
+    elif total_build_score < 457000:
+        level = 72
+    elif total_build_score < 475000:
+        level = 73
+    elif total_build_score < 493000:
+        level = 74
+    elif total_build_score < 511000:
+        level = 75
+    elif total_build_score < 530000:
+        level = 76
+    elif total_build_score < 549000:
+        level = 77
+    elif total_build_score < 568000:
+        level = 78
+    elif total_build_score < 588000:
+        level = 79
+    elif total_build_score < 608000:
+        level = 80
+    elif total_build_score < 628000:
+        level = 81
+    elif total_build_score < 648000:
+        level = 82
+    elif total_build_score < 668000:
+        level = 83
+    elif total_build_score < 688000:
+        level = 84
+    elif total_build_score < 708000:
+        level = 85
+    elif total_build_score < 728000:
+        level = 86
+    elif total_build_score < 748000:
+        level = 87
+    elif total_build_score < 768000:
+        level = 88
+    elif total_build_score < 788000:
+        level = 89
+    elif total_build_score < 808000:
+        level = 90
+    elif total_build_score < 828000:
+        level = 91
+    elif total_build_score < 848000:
+        level = 92
+    elif total_build_score < 868000:
+        level = 93
+    elif total_build_score < 888000:
+        level = 94
+    elif total_build_score < 908000:
+        level = 95
+    elif total_build_score < 928000:
+        level = 96
+    elif total_build_score < 948000:
+        level = 97
+    elif total_build_score < 968000:
+        level = 98
+    elif total_build_score < 1000000:
+        level = 99
     else:
-        level = "51以上"
+        level = 100
     #────────────ここまでコピペ禁止────────────
 
     total_build_score = "{:,}".format(total_build_score)
