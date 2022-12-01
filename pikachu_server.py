@@ -12,22 +12,22 @@ async def on_message(client1, message, prefix, command):
             await commands.daily_score(message, command)
 
         elif command.startswith("last_login "):
-            await commands.last_login(message)
+            await commands.last_login(message, command)
 
         elif command.startswith("mcavatar "):
-            await commands.mcavatar(message)
+            await commands.mcavatar(message, command)
 
         elif command.startswith("stack_eval "):
-            await commands.stack_eval64(message)
+            await commands.stack_eval64(message, command)
 
         elif command.startswith("stack_eval64 "):
-            await commands.stack_eval64(message)
+            await commands.stack_eval64(message, command)
 
         elif command.startswith("stack_eval16 "):
-            await commands.stack_eval16(message)
+            await commands.stack_eval16(message, command)
 
         elif command.startswith("stack_eval1 "):
-            await commands.stack_eval1(message)
+            await commands.stack_eval1(message, command)
 
         elif command.startswith("info "):
-            await commands.info(client1, message)
+            await commands.info(client1, message, command)
