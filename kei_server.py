@@ -284,8 +284,8 @@ async def on_message(client1, message, prefix, command):
     elif message.channel.id == 722810355511984185:
         await create_new_func(client1, message)
 
-    #elif message.channel.id == 665487669953953804:
-    #    await limited_time.simple_kikaku_join(message) #応募者に企画参加者役職を付与する
+    elif message.channel.id == 665487669953953804:
+        await limited_time.simple_kikaku_join(message) #応募者に企画参加者役職を付与する
     #    await limited_time.seichi_taikai_join(message) #整地大会用の企画
 
     if "twitter.com" in message.content:
