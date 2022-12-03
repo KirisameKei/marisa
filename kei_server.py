@@ -143,7 +143,7 @@ async def on_member_update(before, after, client1):
         with open("./datas/user_data.json", mode="w", encoding="utf-8") as f:
             f.write(user_data_json)
 
-        notice_ch = client1.get_channel(595072269483638785) #1組、本番実装時お知らせへ
+        notice_ch = client1.get_channel(585999375952642067)
         int_role = before.guild.get_role(586418283780112385)
         regular_member_1_role = before.guild.get_role(641454086310461478)
         regular_member_2_role = before.guild.get_role(726246561100857345)
@@ -519,6 +519,39 @@ async def jms_notice(client1):
     )
 
 
+async def check_new_int_role_getter(client1):
+    """
+    新たに21億以上掘った人がいないか確認する"""
+
+    connection = MySQLdb.connect(
+        host=os.getenv("mysql_host"),
+        user=os.getenv("mysql_user"),
+        passwd=os.getenv("mysql_passwd"),
+        db=os.getenv("mysql_db_name")
+    )
+    cursor = connection.cursor()
+    cursor.execute("select id, uuid from uuids")
+    result = cursor.fetchall()
+    cursor.close()
+    connection.close()
+
+    with open("./datas/player_data.json", mode="r", encoding="utf-8") as f:
+        player_data_dict = json.load(f)
+
+    guild = client1.get_guild(585998962050203672)
+    int_role = guild.get_role(586418283780112385)
+    for user_id, uuid in result:
+        uuid = re.sub(r"(\w{8})(\w{4})(\w{4})(\w{4})(\w{12})", r"\1-\2-\3-\4-\5", uuid)
+        try:
+            seichi_break = player_data_dict[uuid]["total_break"]
+        except KeyError:
+            pass
+        else:
+            if seichi_break >= 2100000000:
+                member = guild.get_member(user_id)
+                await member.add_roles(int_role)
+
+
 async def kei_daily_score(client1):
     """
     kei_3104の日間整地量を表示"""
@@ -615,7 +648,6 @@ async def check_mcid_exist_now(client1):
         user_data_dict = json.load(f)
 
     description = ""
-    alart_ch = client1.get_channel(585999375952642067) #お知らせ
     alart_ch = client1.get_channel(595072269483638785) #1組
     connection = MySQLdb.connect(
         host=os.getenv("mysql_host"),
@@ -631,33 +663,35 @@ async def check_mcid_exist_now(client1):
             try:
                 uuid = result[0][0]
             except IndexError: #IndexErrorが出る=今週のMCID変更者はいない
-                return
+                mcid = mcid.replace("_", "\_")
+                await alart_ch.send(f"IndexError: {mcid}")
 
-            url = f"https://sessionserver.mojang.com/session/minecraft/profile/{uuid}"
-            try:
-                res = requests.get(url)
-                res.raise_for_status()
-            except requests.exceptions.HTTPError:
-                await client1.get_channel(595072269483638785).send("MojangAPIが落ちているため今週はMCIDチェックはできませんでした") #1組に送信
-                cursor.close()
-                connection.close()
-                return
-
-            try:
-                mcid_uuid_data = res.json()
-            except: #ここでエラーが出るのはMCIDが消されたとき
-                await alart_ch.send(f"<@523303776120209408> {mcid}: ({uuid})は消された可能性があります。確認されたい")
             else:
-                new_mcid = mcid_uuid_data["name"]
-                if mcid != new_mcid:
-                    cursor.execute(f"update uuids set mcid='{new_mcid}' where mcid='{mcid}'")
-                    connection.commit()
+                url = f"https://sessionserver.mojang.com/session/minecraft/profile/{uuid}"
+                try:
+                    res = requests.get(url)
+                    res.raise_for_status()
+                except requests.exceptions.HTTPError:
+                    await client1.get_channel(595072269483638785).send("MojangAPIが落ちているため今週はMCIDチェックはできませんでした") #1組に送信
+                    cursor.close()
+                    connection.close()
+                    return
 
-                    mcid_list = user_data_dict[user_id]["mcid"]
-                    mcid_list.remove(mcid)
-                    mcid_list.append(new_mcid)
+                try:
+                    mcid_uuid_data = res.json()
+                except: #ここでエラーが出るのはMCIDが消されたとき
+                    await alart_ch.send(f"<@523303776120209408> {mcid}: ({uuid})は消された可能性があります。確認されたい")
+                else:
+                    new_mcid = mcid_uuid_data["name"]
+                    if mcid != new_mcid:
+                        cursor.execute(f"update uuids set mcid='{new_mcid}' where mcid='{mcid}'")
+                        connection.commit()
 
-                    description += f"<@{user_id}>の{mcid}を{new_mcid}に置換します\n"
+                        mcid_list = user_data_dict[user_id]["mcid"]
+                        mcid_list.remove(mcid)
+                        mcid_list.append(new_mcid)
+
+                        description += f"<@{user_id}>の{mcid}を{new_mcid}に置換します\n"
 
     cursor.close()
     connection.close()
