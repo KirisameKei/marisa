@@ -3,7 +3,13 @@ import json
 import os
 import random
 import re
+import sys
 import traceback
+
+if os.path.isdir("C:\\Users\\hayab\\AppData\\Roaming\\Python\\Python38\\discordv2"): #ローカルなら
+    sys.path.append("C:\\Users\\hayab\\AppData\\Roaming\\Python\\Python38\\discordv2")
+else:
+    sys.path.append("/home/kirisamekei/discordv1")
 
 import discord
 import requests
@@ -67,6 +73,7 @@ def unexpected_error(msg=None):
 @client1.event
 async def on_ready():
     try:
+        loop_task.start()
         login_notice_ch = client1.get_channel(595072269483638785)
         with open("./datas/version.txt", mode="r", encoding="utf-8") as f:
             version = f.read()
@@ -502,7 +509,7 @@ async def loop_task():
     except:
         unexpected_error()
 
-loop_task.start()
+#loop_task.start()
 
 
 @tasks.loop(seconds=30)
@@ -541,7 +548,7 @@ async def change_status():
     except:
         unexpected_error()
 
-change_status.start()
+#change_status.start()
 
 
 @tasks.loop(seconds=60)
