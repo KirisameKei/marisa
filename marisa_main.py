@@ -122,7 +122,8 @@ async def on_message(message):
         return
 
     if client1.user in message.mentions:
-        await message.channel.send(f"{where_from}\n{os.path.basename(__file__)}")
+        fileplace = discord.__file__.replace("\\", "\\\\").replace("_", "\_")
+        await message.channel.send(f"{where_from}\n{os.path.basename(__file__)}\n{discord.__version__}\n{fileplace}")
 
     try:
         if message.guild is not None:
