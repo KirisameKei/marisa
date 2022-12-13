@@ -15,7 +15,7 @@ async def on_message(client1, message, prefix, command):
         elif command.startswith("build "):
             await commands.total_build(message, command)
 
-        elif command.startswith("daily"):
+        elif command.startswith("daily "):
             await commands.daily_score(message, command)
 
         elif command.startswith("last_login "):
