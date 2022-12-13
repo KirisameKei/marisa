@@ -1106,7 +1106,7 @@ async def check_mcid_format(message, command):
             await message.channel.send(f"{mcid}は存在しません1←この数字は仕様です")
             return None
 
-        except simplejson.errors:
+        except simplejson.errors.JSONDecodeError:
             mcid = mcid.replace("_", "\_")
             await message.channel.send(f"{mcid}は存在しません2←この数字は仕様です")
             return None
