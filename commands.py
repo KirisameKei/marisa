@@ -624,17 +624,18 @@ async def stack_eval64(message, command):
     """
     スタック数の計算をする"""
 
-    msg = command.replace("/stack_eval64 ", "").replace("/stack_eval ", "")
+    msg = command.replace("stack_eval64 ", "").replace("stack_eval ", "")
     msg = msg.lower()
     msg = msg.replace("lc", "*3456").replace("sb", "*1728").replace("c", "*1728").replace("st", "*64").replace("個", "")
     p = re.compile(r"^[0-9 +\-*/%().]+$")
+    print(msg)
     if not p.fullmatch(msg):
-        await message.channel.send("不正な入力です")
+        await message.channel.send("不正な入力です1")
         return
     try:
         result = eval(msg)
     except (SyntaxError, NameError, OverflowError, TypeError):
-        await message.channel.send("不正な入力です")
+        await message.channel.send("不正な入力です2")
     except ZeroDivisionError:
         await message.channel.send("変な入力するんじゃねぇ！")
     else:
@@ -661,7 +662,7 @@ async def stack_eval16(message, command):
     """
     スタック数の計算をする"""
 
-    msg = command.replace("/stack_eval16 ", "")
+    msg = command.replace("stack_eval16 ", "")
     msg = msg.lower()
     msg = msg.replace("lc", "*864").replace("sb", "*432").replace("c", "*432").replace("st", "*16").replace("個", "")
     p = re.compile(r"^[0-9 +\-*/%().]+$")
@@ -698,7 +699,7 @@ async def stack_eval1(message, command):
     """
     スタック数の計算をする"""
 
-    msg = command.replace("/stack_eval1 ", "")
+    msg = command.replace("stack_eval1 ", "")
     msg = msg.lower()
     msg = msg.replace("lc", "*54").replace("sb", "*27").replace("c", "*27").replace("st", "*1").replace("個", "")
     p = re.compile(r"^[0-9 +\-*/%().]+$")
