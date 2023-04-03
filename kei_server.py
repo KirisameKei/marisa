@@ -692,6 +692,7 @@ async def check_mcid_exist_now(client1):
                         mcid_list.append(new_mcid)
 
                         description += f"<@{user_id}>の{mcid}を{new_mcid}に置換します\n"
+                        await alart_ch.send(f"{mcid_list} #MCID変更システム不具合探求用 このリストから旧MCIDが消え新MCIDが入っていればここまで正常")
 
     cursor.close()
     connection.close()
