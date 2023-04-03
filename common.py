@@ -631,7 +631,7 @@ async def help(message, command, client1):
             local_command_help += "\n**/unban␣ID**"
             local_command_help += "\n**/delete_user_data␣ID**"
             local_command_help += "\n**/ban_list**"
-            local_command_help += "\n**/gban_lit**"
+            local_command_help += "\n**/gban_list**"
             local_command_help += "\n**/global_notice␣content**"
             local_command_help += "\n**/leave_guild␣ID␣reason**"
 
@@ -681,8 +681,74 @@ async def help(message, command, client1):
             local_help = "・絵文字の作成、変更、削除を記録します"
             local_help += "\n・絵文字作成時にバックアップを取ります"
 
+        elif message.guild.id in (863367920612802610, 659375053707673600): #あんず鯖
+            local_command_help = "**/break␣MCID**"
+            local_command_help += "\n**/build␣MCID**"
+            local_command_help += "\n**/daily␣MCID**"
+            local_command_help += "\n**/last_login␣MCID**"
+            local_command_help += "\n**/mcavatar MCID**"
+            local_command_help += "\n**/stack_eval␣args**"
+            local_command_help += "\n**/stack_eval64␣args**"
+            local_command_help += "\n**/stack_eval16␣args**"
+            local_command_help += "\n**/stack_eval1␣args**"
+            local_command_help += "\n**/info␣[role, guild, user, ch, emoji]␣ID**"
+            local_command_help += "\n**/random␣[choice, sample, choices, randint]␣args**"
+            local_command_help += "\n**/weather␣[map, 地点名]**"
+            local_command_help += "\n**/vote␣args**"
+            local_command_help += "\n**/name␣n**"
+
+        elif message.guild.id in (876143248471621652, 660445544296218650): #いろは鯖
+            local_command_help = "**/break␣MCID**"
+            local_command_help += "\n**/build␣MCID**"
+            local_command_help += "\n**/daily␣MCID**"
+            local_command_help += "\n**/last_login␣MCID**"
+            local_command_help += "\n**/mcavatar MCID**"
+            local_command_help += "\n**/stack_eval␣args**"
+            local_command_help += "\n**/stack_eval64␣args**"
+            local_command_help += "\n**/stack_eval16␣args**"
+            local_command_help += "\n**/stack_eval1␣args**"
+            local_command_help += "\n**/info␣[role, guild, user, ch, emoji]␣ID**"
+            local_command_help += "\n**/random␣[choice, sample, choices, randint]␣args**"
+            local_command_help += "\n**/weather␣[map, 地点名]**"
+            local_command_help += "\n**/vote␣args**"
+            local_command_help += "\n**/name␣n**"
+
+        elif message.guild.id == 812096632714690601: #起きてー
+            local_command_help = "**/break␣MCID**"
+            local_command_help += "\n**/build␣MCID**"
+            local_command_help += "\n**/daily␣MCID**"
+            local_command_help += "\n**/last_login␣MCID**"
+            local_command_help += "\n**/mcavatar MCID**"
+            local_command_help += "\n**/stack_eval␣args**"
+            local_command_help += "\n**/stack_eval64␣args**"
+            local_command_help += "\n**/stack_eval16␣args**"
+            local_command_help += "\n**/stack_eval1␣args**"
+            local_command_help += "\n**/info␣[role, guild, user, ch, emoji]␣ID**"
+            local_command_help += "\n**/random␣[choice, sample, choices, randint]␣args**"
+            local_command_help += "\n**/weather␣[map, 地点名]**"
+            local_command_help += "\n**/vote␣args**"
+            local_command_help += "\n**/name␣n**"
+
+        elif message.guild.id == 985092628594978867: #ぴかちゅう鯖
+            local_command_help = "**/break␣MCID**"
+            local_command_help += "\n**/build␣MCID**"
+            local_command_help += "\n**/daily␣MCID**"
+            local_command_help += "\n**/last_login␣MCID**"
+            local_command_help += "\n**/mcavatar MCID**"
+            local_command_help += "\n**/stack_eval␣args**"
+            local_command_help += "\n**/stack_eval64␣args**"
+            local_command_help += "\n**/stack_eval16␣args**"
+            local_command_help += "\n**/stack_eval1␣args**"
+            local_command_help += "\n**/info␣[role, guild, user, ch, emoji]␣ID**"
+
+
+        elif message.guild.id == 731437075622133861: #徹夜鯖
+            local_command_help = "\n**/daily␣MCID**"
+
+
         if local_command_help is not None:
             help_embed.add_field(name=f"{message.guild.name}でのコマンド", value=local_command_help, inline=False)
+        if local_help is not None:
             help_embed.add_field(name=f"{message.guild.name}での機能", value=local_help, inline=False)
 
         await message.channel.send(embed=help_embed)
