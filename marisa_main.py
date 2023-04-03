@@ -25,6 +25,7 @@ import limited_time
 import muhou
 import pikachu_server
 import server_log
+import tetsuya_server
 import wake_up
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -239,6 +240,9 @@ async def on_message(message):
 
         elif message.guild.id == 985092628594978867: #ピカチュウ鯖(プロセカ用鯖)なら
             await pikachu_server.on_message(client1, message, prefix, command)
+
+        elif message.guild.id == 731437075622133861: #徹夜太郎鯖なら
+            await tetsuya_server.on_message(client1, message, prefix, command)
 
     except:
         unexpected_error(msg=message)
