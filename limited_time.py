@@ -121,7 +121,7 @@ async def seichi_taikai_join(message):
         return
 
     now = datetime.datetime.now()
-    finish_time = datetime.datetime(2022, 9, 23, 23, 55)
+    finish_time = datetime.datetime(2023, 7, 29, 23, 55)
     if now >= finish_time:
         await message.channel.send("参加締め切り時刻を過ぎています")
         return
@@ -230,7 +230,7 @@ async def simple_kikaku_result(client1):
 
     embed = discord.Embed(title=":tada:おめでとう:tada:", description=description, color=0xffff00)
     ch = client1.get_channel(586420858512343050)
-    await ch.send(content="@&668021019700756490>", embed=embed)
+    await ch.send(content="<@&668021019700756490>", embed=embed)
     await ch.send(
         "**受け取り期日は2022/04/31までとします\n"
         "**当選者で事情により期限内に受け取れない場合は期限内に言っていただければ対応します。\n"
