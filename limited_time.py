@@ -409,8 +409,8 @@ async def seichi_taikai_result(client1):
         await notice_ch.send(content=mention, embed=embed)
 
 
-async def tanzaku(message):
-    negai = message.content.replace("/tanzaku ", "")
+async def tanzaku(message, command):
+    negai = command.replace("/tanzaku ", "")
     bg_color = random.randint(0x000000, 0xffffff)
     letter_color = 0xffffff - bg_color
     image = Image.new("RGB", (130, 500), bg_color)
