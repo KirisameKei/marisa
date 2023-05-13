@@ -410,7 +410,7 @@ async def seichi_taikai_result(client1):
 
 
 async def tanzaku(message, command):
-    negai = command.replace("/tanzaku ", "")
+    negai = command.replace("tanzaku ", "")
     bg_color = random.randint(0x000000, 0xffffff)
     letter_color = 0xffffff - bg_color
     image = Image.new("RGB", (130, 500), bg_color)
