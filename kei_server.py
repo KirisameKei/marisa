@@ -669,7 +669,7 @@ async def check_mcid_exist_now(client1):
             else:
                 flag = True
                 #url = f"https://sessionserver.mojang.com/session/minecraft/profile/{uuid}"
-                url = f"https://api.mojang.com/user/profile/{uuid}"
+                url = f"http://api.mojang.com/user/profile/{uuid}"
                 try:
                     res = requests.get(url)
                     res.raise_for_status()
