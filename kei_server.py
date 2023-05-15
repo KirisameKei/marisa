@@ -667,29 +667,29 @@ async def check_mcid_exist_now(client1):
                 await alart_ch.send(f"IndexError: {mcid}")
 
             else:
-                url = f"https://sessionserver.mojang.com/session/minecraft/profile/{uuid}"
+                flag = True
+                #url = f"https://sessionserver.mojang.com/session/minecraft/profile/{uuid}"
+                url = f"https://api.mojang.com/user/profile/{uuid}"
                 try:
                     res = requests.get(url)
                     res.raise_for_status()
                 except requests.exceptions.HTTPError:
-                    await client1.get_channel(595072269483638785).send("MojangAPIが落ちているため今週はMCIDチェックはできませんでした") #1組に送信
-                    cursor.close()
-                    connection.close()
-                    return
+                    await alart_ch.send(f"<@523303776120209408> {mcid}: ({uuid})は消された可能性があります。確認されたい") #1組に送信
+                    flag = False
 
-                try:
+                if flag:
                     mcid_uuid_data = res.json()
-                except: #ここでエラーが出るのはMCIDが消されたとき
-                    await alart_ch.send(f"<@523303776120209408> {mcid}: ({uuid})は消された可能性があります。確認されたい")
-                else:
                     new_mcid = mcid_uuid_data["name"]
                     if mcid != new_mcid:
                         cursor.execute(f"update uuids set mcid='{new_mcid}' where mcid='{mcid}'")
                         connection.commit()
 
                         mcid_list = user_data_dict[user_id]["mcid"]
+                        await alart_ch.channel.send(f"1: {mcid_list}")
                         mcid_list.remove(mcid)
+                        await alart_ch.channel.send(f"2: {mcid_list}")
                         mcid_list.append(new_mcid)
+                        await alart_ch.channel.send(f"3: {mcid_list}")
 
                         description += f"<@{user_id}>の{mcid}を{new_mcid}に置換します\n"
                         user_data_dict[user_id]["mcid"] = mcid_list

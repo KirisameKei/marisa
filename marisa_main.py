@@ -500,7 +500,7 @@ async def loop_task():
             await kei_server.record_story(client1)
 
         #毎週水曜日4時35分 MCIDの更新を検知 #デバッグのため日曜にしている
-        if now.weekday() == 6 and now.hour == 4 and now.minute == 35:
+        if now.weekday() == 0 and now.hour == 20 and now.minute == 12:
             await kei_server.check_mcid_exist_now(client1)
 
         #毎年6月28日0時0分 魔理沙bot誕生日記念プレゼント企画開始通知
