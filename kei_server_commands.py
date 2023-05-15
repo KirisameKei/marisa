@@ -1098,7 +1098,7 @@ def check_mcid_exist(mcid):
     boolまたはNoneを返す
     mojangAPIに問い合わせる"""
 
-    url = f"https://api.mojang.com/users/profiles/minecraft/{mcid}"
+    url = f"http://api.mojang.com/users/profiles/minecraft/{mcid}"
     try:
         res = requests.get(url)
         res.raise_for_status()
