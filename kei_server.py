@@ -685,11 +685,11 @@ async def check_mcid_exist_now(client1):
                         connection.commit()
 
                         mcid_list = user_data_dict[user_id]["mcid"]
-                        await alart_ch.channel.send(f"1: {mcid_list}")
+                        await alart_ch.send(f"1: {mcid_list}")
                         mcid_list.remove(mcid)
-                        await alart_ch.channel.send(f"2: {mcid_list}")
+                        await alart_ch.send(f"2: {mcid_list}")
                         mcid_list.append(new_mcid)
-                        await alart_ch.channel.send(f"3: {mcid_list}")
+                        await alart_ch.send(f"3: {mcid_list}")
 
                         description += f"<@{user_id}>の{mcid}を{new_mcid}に置換します\n"
                         user_data_dict[user_id]["mcid"] = mcid_list
