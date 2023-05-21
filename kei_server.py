@@ -649,6 +649,7 @@ async def check_mcid_exist_now(client1):
 
     description = ""
     alart_ch = client1.get_channel(595072269483638785) #1組
+    """
     connection = MySQLdb.connect(
         host=os.getenv("mysql_host"),
         user=os.getenv("mysql_user"),
@@ -699,6 +700,68 @@ async def check_mcid_exist_now(client1):
 
     user_data_json = json.dumps(user_data_dict, indent=4)
     with open("user_data.json", mode="w", encoding="utf-8") as f:
+        f.write(user_data_json)
+
+    description = description.replace("_", "\_")
+    embed = discord.Embed(description=description)
+    await alart_ch.send(embed=embed)"""
+
+    with open("./datas/user_data.json", mode="r", encoding="utf-8") as f:
+        user_data_dict = json.load(f)
+
+    connection = MySQLdb.connect(
+        host=os.getenv("mysql_host"),
+        user=os.getenv("mysql_user"),
+        passwd=os.getenv("mysql_passwd"),
+        db=os.getenv("mysql_db_name")
+    )
+
+    description = ""
+    for user_id in user_data_dict.keys():
+        mcid_list = user_data_dict[user_id]["mcid"]
+        if mcid_list == []:
+            continue
+
+        changed_mcid_list = []
+        for mcid in mcid_list:
+            cursor = connection.cursor()
+            cursor.execute(f"select uuid from uuids where mcid='{mcid}'")
+            result = cursor.fetchall()
+            cursor.close()
+
+            uuid = result[0][0]
+            url = f"https://api.mojang.com/user/profile/{uuid}"
+
+            try:
+                res = requests.get(url)
+                res.raise_for_status()
+            except requests.exceptions.HTTPError:
+                await alart_ch.send(f"{mcid}の検証中にHTTPErrorが発生しました")
+                continue
+
+            data = res.json()
+            try:
+                correct_mcid = data["name"]
+            except KeyError:
+                await alart_ch.send(f"<@523303776120209408> {mcid}: ({uuid})は消された可能性があります。確認されたい") #1組に送信
+            else:
+                if correct_mcid != mcid:
+                    cursor = connection.cursor()
+                    cursor.execute(f"update uuids set mcid='{correct_mcid}' where mcid='{mcid}'")
+                    connection.commit()
+                    cursor.close()
+                    changed_mcid_list.append((mcid, correct_mcid))
+
+        for mcid, correct_mcid in changed_mcid_list:
+            mcid_list.remove(mcid)
+            mcid_list.append(correct_mcid)
+            description += f"<@{user_id}>の{mcid}を{correct_mcid}に置換します\n"
+        user_data_dict[user_id]["mcid"] = mcid_list
+
+    connection.close()
+
+    user_data_json = json.dumps(user_data_dict, indent=4)
+    with open("./datas/user_data.json", mode="w", encoding="utf-8") as f:
         f.write(user_data_json)
 
     description = description.replace("_", "\_")
