@@ -729,7 +729,12 @@ async def check_mcid_exist_now(client1):
             result = cursor.fetchall()
             cursor.close()
 
-            uuid = result[0][0]
+            try:
+                uuid = result[0][0]
+            except IndexError:
+                await alart_ch.send(f"IndexError: {mcid}")
+                continue
+
             url = f"https://api.mojang.com/user/profile/{uuid}"
 
             try:
