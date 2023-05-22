@@ -378,6 +378,12 @@ async def seichi_taikai_result(client1):
         st, ko = divmod(jyunni_housyu+tairyo_saikutsu_housyu+tyousei_housyu+ninzuu_housyu, 64)
         description += f"    　**合計　: {st}st + {ko}個**\n"
 
+        if not (st == 0 and ko == 0):
+            guild = client1.get_guild(585998962050203672)
+            tousen_role = guild.get_role(669720120314167307)
+            member = guild.get_member(user_id)
+            await member.add_roles(tousen_role)
+
         if (rank % 10) == 9:
             embed = discord.Embed(
                 title=f"結果発表({loop}/{page})",
@@ -387,7 +393,7 @@ async def seichi_taikai_result(client1):
             #notice_ch = client1.get_channel(586420858512343050) #企画についてのお知らせ(本番用)
             notice_ch = client1.get_channel(595072269483638785) #1組
             if loop == 1:
-                mention = "<@&668021019700756490>"
+                mention = "< @&668021019700756490>" #下にもあるよ、要修正
             else:
                 mention=""
             await notice_ch.send(content=mention, embed=embed)
@@ -403,7 +409,7 @@ async def seichi_taikai_result(client1):
         #notice_ch = client1.get_channel(586420858512343050) #企画についてのお知らせ(本番用)
         notice_ch = client1.get_channel(595072269483638785) #1組
         if loop == 1:
-            mention = "<@&668021019700756490>"
+            mention = "< @&668021019700756490>" #上にもあるよ、要修正
         else:
             mention=""
         await notice_ch.send(content=mention, embed=embed)
