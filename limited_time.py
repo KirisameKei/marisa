@@ -305,9 +305,9 @@ async def seichi_taikai_result(client1):
         player_data_dict = json.load(f)
 
     rank = 1
-    for player_data in sorted(player_data_dict.values(), key=lambda x: -x["all"]):
+    for player_data in sorted(player_data_dict.values(), key=lambda x: -x["23_58"]):
         if rank == 20:
-            daily_20th_score = player_data["all"]
+            daily_20th_score = player_data["23_58"]
             break
         else:
             rank += 1
@@ -320,7 +320,7 @@ async def seichi_taikai_result(client1):
     for uuid in kikaku_data_dict.keys():
         kikaku_data = kikaku_data_dict[uuid]
         try:
-            kikaku_data["score"] = player_data_dict[uuid]["all"]
+            kikaku_data["score"] = player_data_dict[uuid]["23_58"]
         except KeyError:
             kikaku_data["score"] = 0
 
@@ -384,8 +384,8 @@ async def seichi_taikai_result(client1):
                 description=description,
                 color=0xffff00
             )
-            notice_ch = client1.get_channel(586420858512343050) #企画についてのお知らせ(本番用)
-            #notice_ch = client1.get_channel(595072269483638785) #1組
+            #notice_ch = client1.get_channel(586420858512343050) #企画についてのお知らせ(本番用)
+            notice_ch = client1.get_channel(595072269483638785) #1組
             if loop == 1:
                 mention = "<@&668021019700756490>"
             else:
@@ -400,8 +400,8 @@ async def seichi_taikai_result(client1):
             description=description,
             color=0xffff00
         )
-        notice_ch = client1.get_channel(586420858512343050) #企画についてのお知らせ(本番用)
-        #notice_ch = client1.get_channel(595072269483638785) #1組
+        #notice_ch = client1.get_channel(586420858512343050) #企画についてのお知らせ(本番用)
+        notice_ch = client1.get_channel(595072269483638785) #1組
         if loop == 1:
             mention = "<@&668021019700756490>"
         else:
