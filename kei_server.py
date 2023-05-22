@@ -649,62 +649,6 @@ async def check_mcid_exist_now(client1):
 
     description = ""
     alart_ch = client1.get_channel(595072269483638785) #1組
-    """
-    connection = MySQLdb.connect(
-        host=os.getenv("mysql_host"),
-        user=os.getenv("mysql_user"),
-        passwd=os.getenv("mysql_passwd"),
-        db=os.getenv("mysql_db_name")
-    )
-    cursor = connection.cursor()
-    for user_id in user_data_dict.keys():
-        for mcid in user_data_dict[user_id]["mcid"]:
-            cursor.execute(f"select uuid from uuids where mcid='{mcid}'")
-            result = cursor.fetchall()
-            try:
-                uuid = result[0][0]
-            except IndexError: #IndexErrorが出る=今週のMCID変更者はいない
-                mcid = mcid.replace("_", "\_")
-                await alart_ch.send(f"IndexError: {mcid}")
-
-            else:
-                flag = True
-                #url = f"https://sessionserver.mojang.com/session/minecraft/profile/{uuid}"
-                url = f"http://api.mojang.com/user/profile/{uuid}"
-                try:
-                    res = requests.get(url)
-                    res.raise_for_status()
-                except requests.exceptions.HTTPError:
-                    await alart_ch.send(f"<@523303776120209408> {mcid}: ({uuid})は消された可能性があります。確認されたい") #1組に送信
-                    flag = False
-
-                if flag:
-                    mcid_uuid_data = res.json()
-                    new_mcid = mcid_uuid_data["name"]
-                    if mcid != new_mcid:
-                        cursor.execute(f"update uuids set mcid='{new_mcid}' where mcid='{mcid}'")
-                        connection.commit()
-
-                        mcid_list = user_data_dict[user_id]["mcid"]
-                        await alart_ch.send(f"1: {mcid_list}")
-                        mcid_list.remove(mcid)
-                        await alart_ch.send(f"2: {mcid_list}")
-                        mcid_list.append(new_mcid)
-                        await alart_ch.send(f"3: {mcid_list}")
-
-                        description += f"<@{user_id}>の{mcid}を{new_mcid}に置換します\n"
-                        user_data_dict[user_id]["mcid"] = mcid_list
-
-    cursor.close()
-    connection.close()
-
-    user_data_json = json.dumps(user_data_dict, indent=4)
-    with open("user_data.json", mode="w", encoding="utf-8") as f:
-        f.write(user_data_json)
-
-    description = description.replace("_", "\_")
-    embed = discord.Embed(description=description)
-    await alart_ch.send(embed=embed)"""
 
     with open("./datas/user_data.json", mode="r", encoding="utf-8") as f:
         user_data_dict = json.load(f)
@@ -770,6 +714,8 @@ async def check_mcid_exist_now(client1):
         f.write(user_data_json)
 
     description = description.replace("_", "\_")
+    if description == "":
+        description = "今週のMCID更新はありません"
     embed = discord.Embed(description=description)
     await alart_ch.send(embed=embed)
 

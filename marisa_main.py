@@ -499,8 +499,8 @@ async def loop_task():
         if now.weekday() == 0 and now.hour == 3 and now.minute == 15:
             await kei_server.record_story(client1)
 
-        #毎週水曜日4時35分 MCIDの更新を検知 #デバッグのため日曜にしている
-        if now.weekday() == 0 and now.hour == 9 and now.minute == 2:
+        #毎週水曜日4時35分 MCIDの更新を検知
+        if now.weekday() == 2 and now.hour == 4 and now.minute == 35:
             await kei_server.check_mcid_exist_now(client1)
 
         #毎年6月28日0時0分 魔理沙bot誕生日記念プレゼント企画開始通知
