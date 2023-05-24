@@ -429,7 +429,7 @@ async def on_raw_reaction_add(client1, payload):
                         )
                         embed.set_author(
                             name=f"{user.display_name}さんが展開",
-                            icon_url=user.avatar_url_as(format="png")
+                            icon_url=user.avatar.url
                         )
                         embed.set_image(url=media["media_url"])
                         await channel.send(embed=embed)
@@ -1118,7 +1118,7 @@ async def story_secret(message, prefix):
         f.write(f"{message.content}\n")
 
     embed = discord.Embed(description=message.content)
-    embed.set_author(name=message.author.name, icon_url=message.author.avatar_url_as(format="png"))
+    embed.set_author(name=message.author.name, icon_url=message.author.avatar.url)
     await message.channel.purge()
     await message.channel.send(embed=embed)
 

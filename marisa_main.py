@@ -3,13 +3,7 @@ import json
 import os
 import random
 import re
-import sys
 import traceback
-
-if os.path.isdir("C:\\Users\\hayab\\AppData\\Roaming\\Python\\Python38\\discordv2"): #ローカルなら
-    sys.path.append("C:\\Users\\hayab\\AppData\\Roaming\\Python\\Python38\\discordv2")
-else:
-    sys.path.append("/home/kirisamekei/discordv1")
 
 import discord
 import requests
@@ -75,6 +69,8 @@ def unexpected_error(msg=None):
 async def on_ready():
     try:
         loop_task.start()
+        change_status.start()
+        kikaku_announcement.start()
         login_notice_ch = client1.get_channel(595072269483638785)
         with open("./datas/version.txt", mode="r", encoding="utf-8") as f:
             version = f.read()
@@ -514,8 +510,6 @@ async def loop_task():
     except:
         unexpected_error()
 
-#loop_task.start()
-
 
 @tasks.loop(seconds=600)
 async def change_status():
@@ -553,8 +547,6 @@ async def change_status():
     except:
         unexpected_error()
 
-change_status.start()
-
 
 @tasks.loop(seconds=60)
 async def kikaku_announcement():
@@ -569,7 +561,6 @@ async def kikaku_announcement():
             await limited_time.seichi_taikai_result(client1) #整地大会用の企画
     except:
         unexpected_error()
-kikaku_announcement.start()
 
 #ーーーーここまでメイン、以下補助関数ーーーー
 
@@ -579,7 +570,7 @@ async def dm(client1, message):
 
     send_ch = client1.get_channel(639830406270681099)
     dm_embed = discord.Embed(description=message.content)
-    dm_embed.set_author(name=f"{message.author.name}\n{message.author.id}", icon_url=message.author.avatar_url_as(format="png"))
+    dm_embed.set_author(name=f"{message.author.name}\n{message.author.id}", icon_url=message.author.avatar.url)
     await send_ch.send(embed=dm_embed)
 
 

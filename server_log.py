@@ -23,7 +23,7 @@ async def server_log_on_message(client1, message):
     log_channel = client1.get_channel(log_channel_id)
     if message.attachments or message.content or message.embeds:
         message_embed = discord.Embed(description=message.content, color=0xfffffe)
-        message_embed.set_author(name=f"{message.author.name} ({message.id})", icon_url=message.author.avatar_url)
+        message_embed.set_author(name=f"{message.author.name} ({message.id})", icon_url=message.author.avatar.url)
         message_embed.set_footer(text=datetime.datetime.now().strftime(r"%Y/%m/%d-%H:%M"))
         if message.attachments:
             res = requests.get(message.attachments[0].url)
@@ -40,7 +40,7 @@ async def server_log_on_message(client1, message):
         if message.content or message.attachments:
             try:
                 await log_channel.send(file=f, embed=message_embed)
-            except discord.errors.InvalidArgument:
+            except AttributeError:
                 await log_channel.send(embed=message_embed)
 
         if len(message.attachments) >= 2:
@@ -74,7 +74,7 @@ async def server_log_on_message_delete(client1, message):
     log_channel = client1.get_channel(log_channel_id)
     if message.attachments or message.embeds or message.content:
         message_embed = discord.Embed(description=message.content, color=0xff0000)
-        message_embed.set_author(name=f"{message.author.name} ({message.id})", icon_url=message.author.avatar_url)
+        message_embed.set_author(name=f"{message.author.name} ({message.id})", icon_url=message.author.avatar.url)
         message_embed.set_footer(text=datetime.datetime.now().strftime(r"%Y/%m/%d-%H:%M"))
         if message.attachments:
             res = requests.get(message.attachments[0].url)
@@ -88,7 +88,7 @@ async def server_log_on_message_delete(client1, message):
         if message.content or message.attachments:
             try:
                 await log_channel.send(file=f, embed=message_embed)
-            except discord.errors.InvalidArgument:
+            except AttributeError:
                 await log_channel.send(embed=message_embed)
 
         if len(message.attachments) >= 2:
@@ -125,7 +125,7 @@ async def server_log_on_message_update(client1, before, after):
     log_channel = client1.get_channel(log_channel_id)
     if before.attachments or before.content or before.embeds:
         message_embed = discord.Embed(description=f"**編集前**\n{before.content}", color=0x0000ff)
-        message_embed.set_author(name=f"{before.author.name} ({before.id})", icon_url=before.author.avatar_url)
+        message_embed.set_author(name=f"{before.author.name} ({before.id})", icon_url=before.author.avatar.url)
         message_embed.set_footer(text=datetime.datetime.now().strftime(r"%Y/%m/%d-%H:%M"))
         if before.attachments:
             res = requests.get(before.attachments[0].url)
@@ -139,7 +139,7 @@ async def server_log_on_message_update(client1, before, after):
         if before.content or before.attachments:
             try:
                 await log_channel.send(file=f, embed=message_embed)
-            except discord.errors.InvalidArgument:
+            except AttributeError:
                 await log_channel.send(embed=message_embed)
 
         if len(before.attachments) >= 2:
@@ -158,7 +158,7 @@ async def server_log_on_message_update(client1, before, after):
 
     if after.attachments or after.content or after.embeds:
         message_embed = discord.Embed(description=f"**編集後**\n{after.content}", color=0x00ff00)
-        message_embed.set_author(name=f"{after.author.name} ({after.id})", icon_url=after.author.avatar_url)
+        message_embed.set_author(name=f"{after.author.name} ({after.id})", icon_url=after.author.avatar.url)
         message_embed.set_footer(text=datetime.datetime.now().strftime(r"%Y/%m/%d-%H:%M"))
         if after.attachments:
             res = requests.get(after.attachments[0].url)
@@ -172,7 +172,7 @@ async def server_log_on_message_update(client1, before, after):
         if after.content or after.attachments:
             try:
                 await log_channel.send(file=f, embed=message_embed)
-            except discord.errors.InvalidArgument:
+            except AttributeError:
                 await log_channel.send(embed=message_embed)
 
         if len(after.attachments) >= 2:

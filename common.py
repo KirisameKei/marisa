@@ -38,7 +38,7 @@ async def on_guild_join(client1, guild):
         color=0xffff00
     )
     kei = client1.get_user(523303776120209408)
-    self_introduction_embed.set_footer(text="←KirisameKei(作者)", icon_url=kei.avatar_url_as(format="png"))
+    self_introduction_embed.set_footer(text="←KirisameKei(作者)", icon_url=kei.avatar.url)
 
     marisa_notice_ch_id = None
     try:
@@ -87,8 +87,8 @@ async def on_guild_join(client1, guild):
         description=f"{client1.user.name}が{guild.name}に参加しました",
         color=0xfffffe
     )
-    guild_join_embed.set_author(name=client1.user.name,icon_url=client1.user.avatar_url_as(format="png"))
-    guild_join_embed.set_footer(text=guild.name, icon_url=guild.icon_url_as(format="png"))
+    guild_join_embed.set_author(name=client1.user.name,icon_url=client1.user.avatar.url)
+    guild_join_embed.set_footer(text=guild.name, icon_url=guild.icon.url)
     join_leave_notice_ch = client1.get_channel(709307324170240079)
     await join_leave_notice_ch.send(embed=guild_join_embed)
 
@@ -115,8 +115,8 @@ async def on_guild_remove(client1, guild):
         description=f"{client1.user.name}が{guild.name}から退出しました",
         color=0xff0000
     )
-    guild_remove_embed.set_author(name=client1.user.name, icon_url=client1.user.avatar_url_as(format="png"))
-    guild_remove_embed.set_footer(text=guild.name, icon_url=guild.icon_url_as(format="png"))
+    guild_remove_embed.set_author(name=client1.user.name, icon_url=client1.user.avatar.url)
+    guild_remove_embed.set_footer(text=guild.name, icon_url=guild.icon.url)
     join_leave_notice_ch = client1.get_channel(709307324170240079)
     await join_leave_notice_ch.send(embed=guild_remove_embed)
 
@@ -128,8 +128,8 @@ async def on_member_join(client1, member):
 
     when_from = (member.created_at + datetime.timedelta(hours=9)).strftime(r"%Y/%m/%d　%H:%M")
     member_embed = discord.Embed(title="╋", description=f"{member.mention}が{member.guild.name}に参加しました\n{when_from}からのdiscordユーザー", color=0xfffffe)
-    member_embed.set_author(name=member.name, icon_url=member.avatar_url)
-    member_embed.set_footer(text=member.guild.name, icon_url=member.guild.icon_url)
+    member_embed.set_author(name=member.name, icon_url=member.avatar.url)
+    member_embed.set_footer(text=member.guild.name, icon_url=member.guild.icon.url)
     join_leave_notice_ch = client1.get_channel(709307324170240079)
     await join_leave_notice_ch.send(embed=member_embed)
 
@@ -143,8 +143,8 @@ async def on_member_remove(client1, member):
     けい鯖にその旨を伝え、けい鯖なら専用の関数を呼ぶ"""
 
     member_embed = discord.Embed(title="━", description=f"{member.mention}が{member.guild.name}から退出しました", color=0xff0000)
-    member_embed.set_author(name=member.name, icon_url=member.avatar_url)
-    member_embed.set_footer(text=member.guild.name, icon_url=member.guild.icon_url)
+    member_embed.set_author(name=member.name, icon_url=member.avatar.url)
+    member_embed.set_footer(text=member.guild.name, icon_url=member.guild.icon.url)
     join_leave_notice_ch = client1.get_channel(709307324170240079)
     await join_leave_notice_ch.send(embed=member_embed)
 
@@ -192,8 +192,8 @@ async def quote_message(client1, message, url):
 
         if msg.content or msg.embeds or msg.attachments:
             embed = discord.Embed(description=f"{msg.content}\n\n[リンク](https://discordapp.com/channels/{guild_id}/{channel_id}/{message_id})", timestamp=msg.created_at)
-            embed.set_author(name=msg.author, icon_url=msg.author.avatar_url_as(format="png"))
-            embed.set_footer(text=msg.channel.name, icon_url=msg.guild.icon_url_as(format="png"))
+            embed.set_author(name=msg.author, icon_url=msg.author.avatar.url)
+            embed.set_footer(text=msg.channel.name, icon_url=msg.guild.icon.url)
             if msg.attachments:
                 embed.set_image(url=msg.attachments[0].url)
             embed = quote_reaction(msg, embed)
@@ -299,8 +299,8 @@ async def new_function(client1, message):
         embed.add_field(name="やりたいこと", value=f"{reply_list[1].content}{reply_list[2].content}", inline=False)
         embed.add_field(name="条件の指定", value=reply_list[3].content)
         embed.add_field(name="備考", value=reply_list[4].content)
-        embed.set_author(name=message.author.name, icon_url=message.author.avatar_url_as(format="png"))
-        embed.set_footer(text=message.guild.name, icon_url=message.guild.icon_url_as(format="png"))
+        embed.set_author(name=message.author.name, icon_url=message.author.avatar.url)
+        embed.set_footer(text=message.guild.name, icon_url=message.guild.icon.url)
         if reply_list[0].content == "no":#非公開なら
             send_place = "けいのDM"
             kei = client1.get_user(523303776120209408)
@@ -363,8 +363,8 @@ async def bug_report(client1, message):
             notice_ch = client1.get_channel(636359382359080961)
             now = datetime.datetime.now().strftime(r"%Y/%m/%d　%H:%M")
             notice_embed = discord.Embed(title="バグです！", description=reply.content, color=0xff0000)
-            notice_embed.set_author(name=message.author.name, icon_url=message.author.avatar_url_as(format="png"))
-            notice_embed.set_footer(text=f"{message.guild.name}　{now}", icon_url=message.guild.icon_url_as(format="png"))
+            notice_embed.set_author(name=message.author.name, icon_url=message.author.avatar.url)
+            notice_embed.set_footer(text=f"{message.guild.name}　{now}", icon_url=message.guild.icon.url)
             await notice_ch.send(content="<@523303776120209408>", embed=notice_embed)
             await message.channel.send(
                 "不具合の報告ありがとうございます。内容をけいの実験サーバ「python開発やることリスト」に送信しました。\n"
