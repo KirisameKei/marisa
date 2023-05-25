@@ -570,7 +570,7 @@ async def dm(client1, message):
 
     send_ch = client1.get_channel(639830406270681099)
     dm_embed = discord.Embed(description=message.content)
-    dm_embed.set_author(name=f"{message.author.name}\n{message.author.id}", icon_url=message.author.avatar.url)
+    dm_embed.set_author(name=f"{message.author.name}\n{message.author.id}", icon_url=message.author.display_avatar.url)
     await send_ch.send(embed=dm_embed)
 
 

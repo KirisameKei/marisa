@@ -34,7 +34,7 @@ async def user_data(message, command):
     user_data = user_data_dict[f"{member.id}"]
 
     user_data_embed = discord.Embed(color=0xfffffe)
-    user_data_embed.set_author(name=f"{member.name}", icon_url=member.avatar.url)
+    user_data_embed.set_author(name=f"{member.name}", icon_url=member.display_avatar.url)
 
     roles = ""
     for role in reversed(member.roles):
@@ -708,7 +708,7 @@ async def before_ban(message, client1, command):
         pass
 
     user_info_embed = discord.Embed(title="以下のユーザーを事前BANしますか？", description="はい(BANする): 👍\nいいえ(ミス): 👎", color=0x000000)
-    user_info_embed.set_thumbnail(url=banned_user.avatar.url)
+    user_info_embed.set_thumbnail(url=banned_user.display_avatar.url)
     user_info_embed.add_field(name=".", value=banned_user.name)
     msg = await message.channel.send(embed=user_info_embed)
     await msg.add_reaction("👍")
@@ -776,7 +776,7 @@ async def unban(message, client1, command):
         return
 
     user_info_embed = discord.Embed(title="以下のユーザーの事前BANを解除しますか？", description="はい(解除): 👍\nいいえ(ミス): 👎", color=0x000000)
-    user_info_embed.set_thumbnail(url=banned_user.avatar.url)
+    user_info_embed.set_thumbnail(url=banned_user.display_avatar.url)
     user_info_embed.add_field(name=".", value=banned_user.name)
     msg = await message.channel.send(embed=user_info_embed)
     await msg.add_reaction("👍")
@@ -832,7 +832,7 @@ async def delete_user_data(message, client1, command):
         delete_user_name = "None"
     else:
         user_info_embed = discord.Embed(title="以下のユーザーのデータをすべて抹消しますか？", description="はい(抹消): 👍\nいいえ(ミス): 👎", color=0x000000)
-        user_info_embed.set_thumbnail(url=delete_user.avatar.url)
+        user_info_embed.set_thumbnail(url=delete_user.display_avatar.url)
         user_info_embed.add_field(name=".", value=delete_user.name)
         msg = await message.channel.send(embed=user_info_embed)
         await msg.add_reaction("👍")
@@ -1004,7 +1004,7 @@ async def leave_guild(message, client1, command):
         color=0xff0000
     )
     embed.set_author(name=guild.name, icon_url=guild.icon.url)
-    embed.set_footer(text=guild.owner.name, icon_url=guild.owner.avatar.url)
+    embed.set_footer(text=guild.owner.name, icon_url=guild.owner.display_avatar.url)
     msg = await message.channel.send(embed=embed)
     await msg.add_reaction("👍")
     await msg.add_reaction("👋")

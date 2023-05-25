@@ -1204,7 +1204,7 @@ async def user_info(client1, user_id):
         return error_embed
 
     user_info_embed = discord.Embed(title=user.name, color=0x000000)
-    user_info_embed.set_thumbnail(url=user.avatar.url)
+    user_info_embed.set_thumbnail(url=user.display_avatar.url)
     user_info_embed.add_field(name="botかどうか", value=f"{user.bot}", inline=False)
     user_made_time = (user.created_at + datetime.timedelta(hours=9)).strftime(r"%Y/%m/%d %H:%M")
     user_info_embed.add_field(name="アカウント作成日時", value=f"{user_made_time}　(JST)", inline=False)
