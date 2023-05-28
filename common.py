@@ -475,8 +475,8 @@ async def change_prefix(message):
         return
 
     prefix = message.content.split()[1]
-    if prefix.startswith("//") or prefix.startswith("#"):
-        await message.channel.send("本botの別機能と競合するため「//」や「#」で始まるプレフィックスは使用できません")
+    if prefix.startswith("//"):
+        await message.channel.send("本botの別機能と競合するため「//」で始まるプレフィックスは使用できません")
         return
     elif "\\" in prefix:
         await message.channel.send("表示がややこしくなるためバックスラッシュを含むプレフィックスは使用できません")
