@@ -160,8 +160,11 @@ async def on_message(message):
         if message.content.startswith(prefix):
             prefix_length = len(prefix)
             command = message.content[prefix_length:]
-            if command[0] == " ":
-                command = command[1:]
+            try:
+                if command[0] == " ":
+                    command = command[1:]
+            except IndexError:
+                pass
 
         if "おはよう" in message.content or "こんにちは" in message.content or\
             "こんばんは" in message.content or "おやすみ" in message.content or "ありがとう" in message.content:
