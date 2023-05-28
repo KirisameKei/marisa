@@ -254,7 +254,10 @@ async def accept(message, client1):
             return
         else:
             if i != 2:
-                await message.channel.send(f"{message.author.mention}\nそうは読まないと思います。もう一度書いてみてください。")
+                description = "そうは読まないと思います。もう一度書いてみてください。"
+                if "がんたん" in reply.content:
+                    description += "\nそれ本当に「元旦(がんたん)」ですか？落ち着いてよく見てみましょう"
+                await message.channel.send(f"{message.author.mention}\n{description}")
 
     await message.channel.send(
         f"{message.author.mention}\n"
