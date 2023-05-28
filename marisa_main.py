@@ -127,8 +127,7 @@ async def on_message(message):
             if message.guild.id == 585998962050203672: #けい鯖なら
                 await server_log.server_log_on_message(client1, message)
 
-        if message.content.startswith("#") or message.content.startswith("//") or \
-            (message.clean_content.startswith("/*") and message.clean_content.endswith("*/")):
+        if message.content.startswith("//") or (message.clean_content.startswith("/*") and message.clean_content.endswith("*/")):
             return
 
         if re.compile(r"https://(ptb.|canary.|)discord(app|).com/channels/").search(message.content):
