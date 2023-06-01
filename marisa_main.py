@@ -332,7 +332,7 @@ async def on_guild_channel_create(channel):
         
         now = datetime.datetime.now().strftime(r"%Y/%m/%d-%H:%M")
         ch_embed = discord.Embed(title="チャンネル作成", description=ch_description, color=0xfffffe)
-        ch_embed.set_footer(text=now, icon_url=channel.guild.icon.url)
+        ch_embed.set_footer(text=now, icon_url=channel.guild.icon)
         ch_notice_ch = client1.get_channel(682732694768975884)
         await ch_notice_ch.send(embed=ch_embed)
 
@@ -370,7 +370,7 @@ async def on_guild_channel_delete(channel):
         now = datetime.datetime.now().strftime(r"%Y/%m/%d-%H:%M")
         ch_description = f"{guild_name}で{channel_type}「{channel.name}」が削除されました"
         ch_embed = discord.Embed(title="チャンネル削除", description=ch_description, color=0xff0000)
-        ch_embed.set_footer(text=now, icon_url=channel.guild.icon.url)
+        ch_embed.set_footer(text=now, icon_url=channel.guild.icon)
         ch_notice_ch = client1.get_channel(682732694768975884)
         await ch_notice_ch.send(embed=ch_embed)
 
@@ -405,7 +405,7 @@ async def on_guild_channel_update(before, after):
             
             now = datetime.datetime.now().strftime(r"%Y/%m/%d-%H:%M")
             ch_embed = discord.Embed(title="チャンネルアップデート", description=ch_description, color=0x0000ff)
-            ch_embed.set_footer(text=now, icon_url=before.guild.icon.url)
+            ch_embed.set_footer(text=now, icon_url=before.guild.icon)
             ch_notice_ch = client1.get_channel(682732694768975884)
             await ch_notice_ch.send(embed=ch_embed)
 
