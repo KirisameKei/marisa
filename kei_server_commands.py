@@ -301,7 +301,7 @@ async def delmsg(message, client1, command):
         await message.author.add_roles(doM_role)
         return
 
-    if command == "delmsg2":
+    if command == "delmsg":
         msg = await message.channel.send("このチャンネルのメッセージを**全削除**しようとしています\nよろしいですか？")
         await msg.add_reaction("👍")
         await msg.add_reaction("👎")
