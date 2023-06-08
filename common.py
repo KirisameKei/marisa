@@ -213,6 +213,9 @@ async def quote_message(client1, message, url):
     except discord.errors.NotFound:
         await message.channel.send("メッセージが見つかりません")
 
+    except discord.errors.Forbidden:
+        await message.channel.send("メッセージの閲覧権限がありません")
+
 
 async def new_function(client1, message):
     """
