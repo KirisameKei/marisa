@@ -26,7 +26,7 @@ async def simple_kikaku_join(message):
         return
 
     now = datetime.datetime.now()
-    finish_time = datetime.datetime(2023, 4, 1, 0, 0)
+    finish_time = datetime.datetime(2023, 8, 15, 0, 0)
     if now >= finish_time:
         await message.channel.send("現在企画は行われていません")
         return
@@ -262,9 +262,9 @@ async def complex_kikaku_result(client1):
 
     price_list = [0] #起点、触るな
     for i in range(tousen_ninzuu-1): #rang内は当選人数-1 (ex: 10人が当選のとき9)
-        n = random.randint(0, 1344) #randintの第2引数は総額の個数
+        n = random.randint(0, 2560) #randintの第2引数は総額の個数
         price_list.append(n)
-    price_list.append(1344) #randintの第2引数と同じ値を入れること
+    price_list.append(2560) #randintの第2引数と同じ値を入れること
     price_list.sort()
 
     give_list = []
@@ -283,7 +283,7 @@ async def complex_kikaku_result(client1):
     ch = client1.get_channel(586420858512343050)
     await ch.send(content="<@&668021019700756490>", embed=embed)
     await ch.send(
-        "**受け取り期日は2022/12/31までとします\n"
+        "**受け取り期日は2023/10/17までとします\n"
         "**当選者で事情により期限内に受け取れない場合は期限内に言っていただければ対応します。\n"
         "受け取り辞退をする場合<#665487669953953804>にて`/cancel`をしてください。"
     )
