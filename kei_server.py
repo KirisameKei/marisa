@@ -263,6 +263,9 @@ async def on_message(client1, message, prefix, command):
         #elif command.startswith("tanzaku "):
         #    await limited_time.tanzaku(message, command)
 
+        elif command == "test":
+            await limited_time.complex_kikaku_result(client1)
+
     if message.channel.id == 640833025822949387:
         await register_mcid(message, client1)
 

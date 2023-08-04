@@ -279,9 +279,10 @@ async def complex_kikaku_result(client1):
         tousen[i].add_roles(tousen_role)
         description += f"{tousen[i].mention}: {give_list[i]}\n" 
 
-    embed = discord.Embed(title=":tada:おめでとう:tada:", description=description, color=0xffff00)
-    ch = client1.get_channel(586420858512343050)
-    await ch.send(content="<@&668021019700756490>", embed=embed)
+    embed = discord.Embed(title=":tada:おめでとう:tada:(これはデバッグです)", description=description, color=0xffff00)
+    #ch = client1.get_channel(586420858512343050) #企画お知らせ
+    ch = client1.get_channel(595072269483638785) #1組
+    await ch.send(content="<@ &668021019700756490>", embed=embed)
     await ch.send(
         "**受け取り期日は2023/10/17までとします\n"
         "**当選者で事情により期限内に受け取れない場合は期限内に言っていただければ対応します。\n"
