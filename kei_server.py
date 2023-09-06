@@ -9,7 +9,6 @@ import discord
 import jaconv
 import MySQLdb
 import requests
-import tweepy
 from urlextract import URLExtract
 
 import commands
@@ -288,9 +287,6 @@ async def on_message(client1, message, prefix, command):
         await limited_time.simple_kikaku_join(message) #応募者に企画参加者役職を付与する
     #    await limited_time.seichi_taikai_join(message) #整地大会用の企画
 
-    if "twitter.com" in message.content:
-        await expand_pictures_of_twitter(message)
-
 
 async def on_reaction_add(client1, reaction, user):
     msg = reaction.message
@@ -380,60 +376,6 @@ async def on_raw_reaction_add(client1, payload):
 
         await asyncio.sleep(3)
         await system_message.delete()
-
-    elif str(payload.emoji) == "▶️":
-        if client1.user.id == payload.user_id:
-            return
-        channel = client1.get_channel(payload.channel_id)
-        message = await channel.fetch_message(payload.message_id)
-        user = client1.get_user(payload.user_id)
-        urls = URLExtract().find_urls(message.content)
-
-        if user.bot:
-            return
-
-        for url in urls:
-            if "twitter.com" in url:
-                tweet_id = None
-                try:
-                    tweet_id = url.split("/")[5].split("?")[0]
-                except IndexError: #少なくとも複数画像持ちのツイートに対するURLではないため無視で良い
-                    pass
-
-                if tweet_id is not None:
-                    # APIの秘密鍵
-                    consumer_key = os.getenv("consumer_key")
-                    consumer_secret = os.getenv("consumer_secret")
-                    twitter_token = os.getenv("twitter_token")
-                    token_secret = os.getenv("token_secret")
-
-                    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-                    auth.set_access_token(twitter_token, token_secret)
-                    api = tweepy.API(auth)
-
-                    try:
-                        tweet = api.get_status(id=tweet_id, tweet_mode="extended")
-                    except tweepy.errors.NotFound:
-                        return #存在しないURLなので無視してよろしい
-                    tweet_data = tweet._json
-
-                    try:
-                        medias = tweet_data["extended_entities"]["media"] #mediasはリスト
-                    except KeyError:
-                        return #画像はないので終了してよい
-
-                    for media in medias[1:]:
-                        embed = discord.Embed(
-                            description=f"{medias.index(media)+1}/{len(medias)}",
-                            color=0x00aaff
-                        )
-                        embed.set_author(
-                            name=f"{user.display_name}さんが展開",
-                            icon_url=user.display_avatar.url
-                        )
-                        embed.set_image(url=media["media_url"])
-                        await channel.send(embed=embed)
-                        await asyncio.sleep(0.3)
 
 
 async def count_members(client1):
@@ -1316,37 +1258,3 @@ async def create_new_func(client1, message):
         f.write(custom_commands_json)
 
     await user.send(f"新規コマンド:{trigger}を登録しました。")
-
-
-async def expand_pictures_of_twitter(message):
-    urls = URLExtract().find_urls(message.content)
-    for url in urls:
-        if "twitter.com" in url:
-            try:
-                tweet_id = url.split("/")[5].split("?")[0]
-            except IndexError: #少なくとも複数画像持ちのツイートに対するURLではないため無視で良い
-                pass
-
-            # APIの秘密鍵
-            consumer_key = os.getenv("consumer_key")
-            consumer_secret = os.getenv("consumer_secret")
-            twitter_token = os.getenv("twitter_token")
-            token_secret = os.getenv("token_secret")
-
-            auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-            auth.set_access_token(twitter_token, token_secret)
-            api = tweepy.API(auth)
-
-            try:
-                tweet = api.get_status(id=tweet_id, tweet_mode="extended")
-            except tweepy.errors.NotFound:
-                return #存在しないURLなので無視してよろしい
-            tweet_data = tweet._json
-
-            try:
-                medias = tweet_data["extended_entities"]["media"] #mediasはリスト
-            except KeyError:
-                return #画像はないので終了してよい
-
-            if len(medias) >= 2:
-                await message.add_reaction("▶️")
