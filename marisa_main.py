@@ -468,7 +468,7 @@ async def loop_task():
             await kei_server.count_members(client1)
             await kei_server.change_date(client1)
 
-        #毎日0時0分 mcidとuuidの紐づけjsonをクリア
+        #毎日4時30分 mcidとuuidの紐づけjsonをクリア
         if now.hour == 4 and now.minute == 30:
             clear_cache()
 
@@ -555,9 +555,9 @@ async def kikaku_announcement():
         await client1.wait_until_ready()
         now = datetime.datetime.now()
 
-        if now.month == 8 and now.day == 15 and now.hour == 0 and now.minute == 0:
-            #await limited_time.simple_kikaku_result(client1) #応募者の中からn人選ぶシンプルな企画
-            await limited_time.complex_kikaku_result(client1) #総額いくらを当選人数人でランダムに分配する企画
+        if now.month == 11 and now.day == 18 and now.hour == 12 and now.minute == 0:
+            await limited_time.simple_kikaku_result(client1) #応募者の中からn人選ぶシンプルな企画
+            #await limited_time.complex_kikaku_result(client1) #総額いくらを当選人数人でランダムに分配する企画
             #await limited_time.seichi_taikai_result(client1) #整地大会用の企画
     except:
         unexpected_error()
