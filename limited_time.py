@@ -26,7 +26,7 @@ async def simple_kikaku_join(message):
         return
 
     now = datetime.datetime.now()
-    finish_time = datetime.datetime(2023, 11, 19, 12, 0)
+    finish_time = datetime.datetime(2023, 11, 18, 12, 0)
     if now >= finish_time:
         await message.channel.send("現在企画は行われていません")
         return
