@@ -591,8 +591,36 @@ async def last_login(message, command):
         await message.channel.send("MCIDの文字数として不適です")
         return
 
-    url = f"https://ranking-gigantic.seichi.click/player/{mcid.lower()}"
-    await message.channel.send(f"現在この機能はご利用いただけません。お手数ですがこちらのリンクでご確認ください\n{url}")
+    #url = f"https://ranking-gigantic.seichi.click/player/{mcid.lower()}"
+    url = f"https://api.conarin.com/seichi/ranking/players/{mcid}?duration=total&types=break_count"
+    #await message.channel.send(f"現在この機能はご利用いただけません。お手数ですがこちらのリンクでご確認ください\n{url}")
+    try:
+        res = requests.get(url)
+        res.raise_for_status()
+        player_data_dict = res.json()
+    except requests.exceptions.HTTPError:
+        await message.channel.send("現在データ参照元が使用できない状態です。しばらく待ってからもう一度お試しください。")
+        return
+    
+    last_login_datetime_str = player_data_dict["lastLoginAt"]
+    last_login_datetime_jst = datetime.datetime.strptime(last_login_datetime_str, r"%Y-%m-%dT%H:%M:%S+09:00")
+    #last_login_datetime_jst = last_login_datetime_utc + datetime.timedelta(hours=9)
+    last_login_datetime_jst_str = f"{last_login_datetime_jst.year}-{last_login_datetime_jst.month}-{last_login_datetime_jst.day} {last_login_datetime_jst.hour}:{last_login_datetime_jst.minute}:{last_login_datetime_jst.second}"
+    await message.channel.send(f"{last_login_datetime_jst_str}\n※結果は10分程度の誤差を含みます")
+
+    {
+        "player":{
+            "uuid":"73b41f61-3b2b-4730-b775-564516101b3c",
+            "name":"kei_3104"
+        },
+        "levels":{
+            "seichi":{"level":200,"starLevel":49},
+            "build":{"level":87}
+        },
+        "ranks":[{"duration":"total","type":"break_count","value":"4330000000","rank":17}],
+        "lastLoginAt":"2023-10-28T04:01:31+09:00",
+        "updatedAt":"2023-10-28T15:44:31+09:00"
+    }
 
 
 async def mcavatar(message, command):
