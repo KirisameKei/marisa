@@ -463,6 +463,10 @@ async def loop_task():
         await client1.wait_until_ready()
         now = datetime.datetime.now()
 
+        #毎時15分 JMSのステータスを確認
+        if now.minute == 15:
+            kei_server.check_JMS_status(client1)
+
         #毎日0時0分 日付変更通知と統計表示
         if now.hour == 0 and now.minute == 0:
             await kei_server.count_members(client1)
