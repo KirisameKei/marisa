@@ -472,6 +472,10 @@ async def loop_task():
         if now.hour == 4 and now.minute == 30:
             clear_cache()
 
+        #毎日6時0分 kei_3104がログインしているか確認
+        if now.hour == 6 and now.minute == 0:
+            await kei_server.check_kei_login(client1)
+
         #毎日9時10分 整地鯖への投票リンク
         if now.hour == 9 and now.minute == 10:
             await kei_server.jms_notice(client1)

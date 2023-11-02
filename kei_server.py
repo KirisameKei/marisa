@@ -1258,3 +1258,21 @@ async def create_new_func(client1, message):
         f.write(custom_commands_json)
 
     await user.send(f"新規コマンド:{trigger}を登録しました。")
+
+
+async def check_kei_login(client1):
+    url = f"https://api.conarin.com/seichi/ranking/players/kei_3104?duration=total&types=break_count"
+    notice_ch = client1.get_channel(595072269483638785)
+    try:
+        res = requests.get(url)
+        res.raise_for_status()
+        kei_data_dict = res.json()
+    except requests.exceptions.HTTPError:
+        await notice_ch.send("<@523303776120209408>\nログイン日時の取得に失敗しました。自分で確認してください")
+        return
+    
+    last_login_datetime_str = kei_data_dict["lastLoginAt"]
+    last_login_datetime_jst = datetime.datetime.strptime(last_login_datetime_str, r"%Y-%m-%dT%H:%M:%S+09:00")
+    before_15min = datetime.datetime.now() - datetime.timedelta(minutes=15)
+    if before_15min > last_login_datetime_jst:
+        await notice_ch.send("<@523303776120209408>\nkei_3104が整地鯖にログインしていないようです")
