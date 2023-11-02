@@ -1258,18 +1258,3 @@ async def create_new_func(client1, message):
         f.write(custom_commands_json)
 
     await user.send(f"新規コマンド:{trigger}を登録しました。")
-
-
-async def check_JMS_status(client1):
-    with open("./datas/checkJMS.txt", mode="r", encoding="utf-8") as f:
-        status = f.read()
-    if status != "503":
-        return
-
-    url = "https://minecraft.jp/servers/54d3529e4ddda180780041a7/"
-    res = requests.get(url)
-    if res.status_code != 503:
-        ch = client1.get_channel(597130965927723048)
-        await ch.send("<@523303776120209408>\nJMSのステータスコードが503ではなくなりました")
-        with open("./datas/checkJMS.txt", mode="w", encoding="utf-8") as f:
-            f.write(f"{res.status_code}")
