@@ -3,6 +3,7 @@ import datetime
 import json
 
 import discord
+from urlextract import URLExtract
 
 import kei_server
 
@@ -454,6 +455,30 @@ async def greeting(message):
             await message.channel.send("お昼寝？おやすみ～")
     if "ありがとう" in message.content:
         await message.add_reaction("🍆")
+
+
+async def vxtwitter(message):
+    """
+    twitter.com, x.comのリンクが展開されないので展開されるvxtwitter.comのリンクを貼るように"""
+
+    if message.author.bot:
+        return
+    
+    if "twitter.com" not in message.content and "x.com" not in message.content:
+        return
+
+    urls = URLExtract().find_urls(message.content)
+    fixed_urls = ""
+    for url in urls:
+        if "twitter.com" in url and "vxtwitter.com" not in url:
+            fixed_url = url.replace("twitter.com", "vxtwitter.com")
+            fixed_urls += f"{fixed_url}\n"
+        elif "x.com" in url:
+            fixed_url = url.replace("x.com", "vxtwitter.com")
+            fixed_urls += f"{fixed_url}\n"
+
+    if fixed_urls != "":
+        await message.channel.send(fixed_urls)
 
 
 async def end_reaction(message):
