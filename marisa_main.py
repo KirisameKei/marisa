@@ -135,6 +135,10 @@ async def on_message(message):
                 if re.search(r"\d+/\d+/\d+", url):
                     await common.quote_message(client1, message, url) #メッセリンク展開用関数
 
+        if message.guild is not None:
+            if message.guild.id in (585998962050203672, 587909823665012757): #けい鯖, 無法地帯
+                await common.vxtwitter(message)
+
         if message.guild is None:
             if message.author.id != client1.user.id:
                 if message.channel == message.author.dm_channel:
