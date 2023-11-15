@@ -9,7 +9,6 @@ import discord
 import jaconv
 import MySQLdb
 import requests
-from urlextract import URLExtract
 
 import commands
 import kei_server_commands
