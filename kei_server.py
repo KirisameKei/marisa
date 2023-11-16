@@ -843,7 +843,19 @@ async def register_mcid(message, client1):
             f.write(user_data_json)
 
         crafter_role = message.guild.get_role(586123363513008139)
-        await message.author.add_roles(crafter_role)
+        if crafter_role not in message.author.roles:
+            await message.author.add_roles(crafter_role)
+
+        seichiserver_role = message.guild.get_role(616790954200006717)
+        if seichiserver_role not in message.author.roles:
+            with open("./datas/player_data.json", mode="r", encoding="utf-8") as f:
+                player_data_dict = json.load(f)
+
+            for mcid, uuid in right_mcid_exsit_list:
+                uuid = re.sub(r"(\w{8})(\w{4})(\w{4})(\w{4})(\w{12})", r"\1-\2-\3-\4-\5", uuid)
+                if uuid in player_data_dict.keys():
+                    await message.author.add_roles(seichiserver_role)
+                    break
 
         mcid_list_str = ", ".join(register_mcid_list).replace("_", "\_")
         await message.channel.send(f"MCIDの登録が完了しました。登録されたMCID: {mcid_list_str}")
