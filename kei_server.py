@@ -859,12 +859,13 @@ async def register_mcid(message, client1):
             await message.channel.send("何を変更したんですか？")
             return
 
-        if kei_server_commands.check_mcid_length(after_mcid):
+        if not kei_server_commands.check_mcid_length(after_mcid):
+            print(after_mcid)
             after_mcid = after_mcid.replace("_", "\_")
             await message.channel.send(f"**{after_mcid}**はMCIDとして成り立ちません")
             return
 
-        if kei_server_commands.check_mcid_yet(after_mcid):
+        if not kei_server_commands.check_mcid_yet(after_mcid):
             after_mcid = after_mcid.replace("_", "\_")
             await message.channel.send(f"**{after_mcid}**は既に登録されています")
             return
