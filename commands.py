@@ -1140,13 +1140,7 @@ async def check_mcid_format(message, command):
             await message.channel.send(f"{mcid}は存在しません2←この数字は仕様です")
             return None
 
-        uuid = mcid_uuid["id"]
-        uuid_1 = uuid[:8]
-        uuid_2 = uuid[8:12]
-        uuid_3 = uuid[12:16]
-        uuid_4 = uuid[16:20]
-        uuid_5 = uuid[20:]
-        uuid = f"{uuid_1}-{uuid_2}-{uuid_3}-{uuid_4}-{uuid_5}"
+        uuid = re.sub(r"(\w{8})(\w{4})(\w{4})(\w{4})(\w{12})", r"\1-\2-\3-\4-\5", uuid)
 
         mcid_uuid_dict[mcid] = uuid
         mcid_uuid_json = json.dumps(mcid_uuid_dict, indent=4)
