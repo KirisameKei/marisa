@@ -842,6 +842,9 @@ async def register_mcid(message, client1):
         with open("./datas/user_data.json", mode="w", encoding="utf-8") as f:
             f.write(user_data_json)
 
+        crafter_role = message.guild.get_role(586123363513008139)
+        await message.author.add_roles(crafter_role)
+
         mcid_list_str = ", ".join(register_mcid_list).replace("_", "\_")
         await message.channel.send(f"MCIDの登録が完了しました。登録されたMCID: {mcid_list_str}")
 

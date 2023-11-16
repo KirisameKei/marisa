@@ -138,7 +138,6 @@ async def accept(message, client1):
 
     new_role = message.guild.get_role(621641465105481738)
     accept_able_role = message.guild.get_role(626062897633689620)
-    crafter_role = message.guild.get_role(586123363513008139)
 
     if not new_role in message.author.roles:
         await message.channel.send("もう新規役職付いてないよ^^")
@@ -244,7 +243,6 @@ async def accept(message, client1):
         if answer_filter.fullmatch(reply.content):
             await message.author.remove_roles(new_role)
             await message.author.remove_roles(accept_able_role)
-            await message.author.add_roles(crafter_role)
             await message.channel.send(
                 f"{message.author.mention}\nあなたはたぶん日本語ユーザーです。第二認証を突破しました。\n"
                 f"改めまして{message.author.name}さんようこそ{message.guild.name}へ！\n"
