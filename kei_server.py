@@ -328,7 +328,7 @@ async def on_raw_reaction_add(client1, payload):
     member = guild.get_member(payload.user_id)
 
     if channel.id == 664286990677573680:
-        if not payload.message_id == 975676283793055765:
+        if not payload.message_id == 1174671007609532466:
             return
 
         if user == client1.user:
@@ -349,6 +349,7 @@ async def on_raw_reaction_add(client1, payload):
             "\U0001f1ef"
         )
         role_id_tuple = (
+            975330354179244053, #VRC
             586123567146729475, #シュータ
             678445373324263454, #乗り鉄
             678445640027734032, #撮り鉄
@@ -357,7 +358,6 @@ async def on_raw_reaction_add(client1, payload):
             606481478078955530, #通知ほしい
             673349311228280862, #投票通知
             848183279458189312, #amongus
-            975330354179244053, #VRC
             774551525083054090, #ミニゲーム
         )
         if payload.emoji.name in emoji_tuple:
