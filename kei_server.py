@@ -460,7 +460,7 @@ async def jms_notice(client1):
     )
 
 
-async def check_new_int_role_getter(client1):
+async def check_new_seichiserver_player_and_int_role_getter(client1):
     """
     新たに21億以上掘った人がいないか確認する"""
 
@@ -480,6 +480,7 @@ async def check_new_int_role_getter(client1):
         player_data_dict = json.load(f)
 
     guild = client1.get_guild(585998962050203672)
+    seichiserver_role = guild.get_role(616790954200006717)
     int_role = guild.get_role(586418283780112385)
     for user_id, uuid in result:
         uuid = re.sub(r"(\w{8})(\w{4})(\w{4})(\w{4})(\w{12})", r"\1-\2-\3-\4-\5", uuid)
@@ -488,6 +489,9 @@ async def check_new_int_role_getter(client1):
         except KeyError:
             pass
         else:
+            if seichiserver_role not in member.roles:
+                await member.add_roles(seichiserver_role)
+
             if seichi_break >= 2100000000:
                 member = guild.get_member(user_id)
                 await member.add_roles(int_role)

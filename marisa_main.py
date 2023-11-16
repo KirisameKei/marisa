@@ -490,7 +490,7 @@ async def loop_task():
 
         #毎日18時15分 新たに21億以上掘った人がいるかチェック
         if now.hour == 18 and now.minute == 15:
-            await kei_server.check_new_int_role_getter(client1)
+            await kei_server.check_new_seichiserver_player_and_int_role_getter(client1)
 
         #毎日23時59分 kei_3104の日間整地量を表示
         if now.hour == 23 and now.minute == 59:
