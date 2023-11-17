@@ -488,8 +488,8 @@ async def loop_task():
         if now.hour == 12 and now.minute == 0:
             await muhou.change_guild_icon(client1)
 
-        #毎日18時15分 新たに21億以上掘った人がいるかチェック
-        if now.hour == 18 and now.minute == 15:
+        #毎日18時50分 新たに21億以上掘った人がいるかチェック
+        if now.hour == 18 and now.minute == 50:
             await kei_server.check_new_seichiserver_player_and_int_role_getter(client1)
 
         #毎日23時59分 kei_3104の日間整地量を表示

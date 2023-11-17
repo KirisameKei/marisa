@@ -489,11 +489,11 @@ async def check_new_seichiserver_player_and_int_role_getter(client1):
         except KeyError:
             pass
         else:
+            member = guild.get_member(user_id)
             if seichiserver_role not in member.roles:
                 await member.add_roles(seichiserver_role)
 
             if seichi_break >= 2100000000:
-                member = guild.get_member(user_id)
                 await member.add_roles(int_role)
 
 
