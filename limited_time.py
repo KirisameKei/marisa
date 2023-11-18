@@ -209,24 +209,27 @@ async def simple_kikaku_result(client1):
     guild = client1.get_guild(585998962050203672)
     kikaku_role = guild.get_role(668021019700756490)
     try:
-        tousen = random.sample(kikaku_role.members, k=5) #kは当選人数
+        tousen = random.sample(kikaku_role.members, k=4) #kは当選人数
     except ValueError:
         tousen = kikaku_role.members
 
     tousen_role = guild.get_role(669720120314167307)
 
-#    description = ""
-#    for mem in tousen:
-#        await mem.add_roles(tousen_role)
-#        description += f"{mem.mention}\n"
+    #複数人同条件の当選者がいるとき用
+    description = ""
+    for mem in tousen:
+        await mem.add_roles(tousen_role)
+        description += f"{mem.mention}\n"
 
+    #条件の違う当選者がいるとき用
 #    description = (
 #        f"1等: {tousen[0].mention}\n"
 #        f"2等: {tousen[1].mention}, {tousen[2].mention}"
 #    )
 
-    description = f"当選者: {tousen[0].mention}"
-    await tousen[0].add_roles(tousen_role)
+    #当選者が1人しかいないとき用
+#    description = f"当選者: {tousen[0].mention}"
+#    await tousen[0].add_roles(tousen_role)
 
     embed = discord.Embed(title=":tada:おめでとう:tada:", description=description, color=0xffff00)
     ch = client1.get_channel(586420858512343050)
