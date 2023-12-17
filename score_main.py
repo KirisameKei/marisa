@@ -158,7 +158,7 @@ def get_score():
                                 content = {
                                     "username": "Score記録",
                                     "avatar_url": avatar_url,
-                                    "content": f"mojanAPIが落ちてちゃ何もできないね！\n{now}"
+                                    "content": f"mojangAPIが落ちてちゃ何もできないね！\n{uuid}\n{now}"
                                 }
                                 requests.post(wh_url, content)
                                 return
