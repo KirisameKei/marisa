@@ -15,7 +15,8 @@ async def simple_kikaku_join(message):
     if message.author.bot:
         return
 
-    kikaku_role = message.guild.get_role(668021019700756490) #企画参加者
+    #kikaku_role = message.guild.get_role(668021019700756490) #企画参加者
+    kikaku_role = message.guild.get_role(1186947369783271549) #temp-企画参加者
 
     if message.content == "/cancel":
         if kikaku_role in message.author.roles:
@@ -26,7 +27,7 @@ async def simple_kikaku_join(message):
         return
 
     now = datetime.datetime.now()
-    finish_time = datetime.datetime(2023, 11, 18, 12, 0)
+    finish_time = datetime.datetime(2024, 1, 1, 0, 0)
     if now >= finish_time:
         await message.channel.send("現在企画は行われていません")
         return
@@ -207,25 +208,29 @@ async def simple_kikaku_result(client1):
     任意の人数選出するだけのシンプルな結果発表"""
 
     guild = client1.get_guild(585998962050203672)
-    kikaku_role = guild.get_role(668021019700756490)
+    #kikaku_role = guild.get_role(668021019700756490)
+    kikaku_role = guild.get_role(1186947369783271549)
     try:
-        tousen = random.sample(kikaku_role.members, k=4) #kは当選人数
+        tousen = random.sample(kikaku_role.members, k=3) #kは当選人数
     except ValueError:
         tousen = kikaku_role.members
 
-    tousen_role = guild.get_role(669720120314167307)
+    #tousen_role = guild.get_role(669720120314167307)
+    tousen_role = guild.get_role(1186947694061682738)
 
     #複数人同条件の当選者がいるとき用
-    description = ""
-    for mem in tousen:
-        await mem.add_roles(tousen_role)
-        description += f"{mem.mention}\n"
+#    description = ""
+#    for mem in tousen:
+#        await mem.add_roles(tousen_role)
+#        description += f"{mem.mention}\n"
 
     #条件の違う当選者がいるとき用
-#    description = (
-#        f"1等: {tousen[0].mention}\n"
-#        f"2等: {tousen[1].mention}, {tousen[2].mention}"
-#    )
+    description = (
+        f"1等: {tousen[0].mention}\n"
+        f"2等: {tousen[1].mention}, {tousen[2].mention}"
+    )
+    for mem in tousen:
+        await mem.add_roles(tousen_role)
 
     #当選者が1人しかいないとき用
 #    description = f"当選者: {tousen[0].mention}"
@@ -233,13 +238,17 @@ async def simple_kikaku_result(client1):
 
     embed = discord.Embed(title=":tada:おめでとう:tada:", description=description, color=0xffff00)
     ch = client1.get_channel(586420858512343050)
-    await ch.send(content="<@&668021019700756490>", embed=embed)
+    #await ch.send(content="<@&668021019700756490>", embed=embed)
+    await ch.send(content="<@&1186947369783271549>", embed=embed)
     await ch.send(
-        "**受け取り期日は2023/12/31までとします\n"
+        "**受け取り期日は2024/01/31までとします\n"
         "**当選者で事情により期限内に受け取れない場合は期限内に言っていただければ対応します。\n"
-#        "kirisamekei都合で受け渡しができない可能性があります。その際は受け取り期限を延長/廃止します。"
-        "参加賞は期限内に受け取ってください。\n参加賞受け取り希望の方でmineでの受け取りを希望する場合は"
-        "s3にてmineでの受け渡しも可能とします。\n受け取り辞退をする場合<#665487669953953804>にて`/cancel`をしてください。"
+        "kirisamekei都合で受け渡しができない可能性があります。その際は受け取り期限を延長/廃止します。"
+#        "参加賞は期限内に受け取ってください。\n"
+#        "参加賞受け取り希望の方でmineでの受け取りを希望する場合はs3にてmineでの受け渡しも可能とします。\n"
+#        "受け取り辞退をする場合<#665487669953953804>にて`/cancel`をしてください。"
+        "受け取り辞退をする場合<#1186948059318472747>にて`/cancel`をしてください。"
+
     )
 
 
