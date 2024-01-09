@@ -208,15 +208,13 @@ async def simple_kikaku_result(client1):
     任意の人数選出するだけのシンプルな結果発表"""
 
     guild = client1.get_guild(585998962050203672)
-    #kikaku_role = guild.get_role(668021019700756490)
-    kikaku_role = guild.get_role(1186947369783271549)
+    kikaku_role = guild.get_role(668021019700756490)
     try:
         tousen = random.sample(kikaku_role.members, k=3) #kは当選人数
     except ValueError:
         tousen = kikaku_role.members
 
-    #tousen_role = guild.get_role(669720120314167307)
-    tousen_role = guild.get_role(1186947694061682738)
+    tousen_role = guild.get_role(669720120314167307)
 
     #複数人同条件の当選者がいるとき用
 #    description = ""
@@ -238,8 +236,7 @@ async def simple_kikaku_result(client1):
 
     embed = discord.Embed(title=":tada:おめでとう:tada:", description=description, color=0xffff00)
     ch = client1.get_channel(586420858512343050)
-    #await ch.send(content="<@&668021019700756490>", embed=embed)
-    await ch.send(content="<@&1186947369783271549>", embed=embed)
+    await ch.send(content="<@&668021019700756490>", embed=embed)
     await ch.send(
         "**受け取り期日は2024/01/31までとします\n"
         "**当選者で事情により期限内に受け取れない場合は期限内に言っていただければ対応します。\n"
@@ -291,7 +288,7 @@ async def complex_kikaku_result(client1):
         tousen[i].add_roles(tousen_role)
         description += f"{tousen[i].mention}: {give_list[i]}\n" 
 
-    embed = discord.Embed(title=":tada:おめでとう:tada:(これはデバッグです)", description=description, color=0xffff00)
+    embed = discord.Embed(title=":tada:おめでとう:tada:", description=description, color=0xffff00)
     ch = client1.get_channel(586420858512343050) #企画お知らせ
     #ch = client1.get_channel(595072269483638785) #1組
     await ch.send(content="<@&668021019700756490>", embed=embed)
