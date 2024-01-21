@@ -457,9 +457,9 @@ async def greeting(message):
         await message.add_reaction("🍆")
 
 
+"""
 async def vxtwitter(message):
-    """
-    twitter.com, x.comのリンクが展開されないので展開されるvxtwitter.comのリンクを貼るように"""
+    twitter.com, x.comのリンクが展開されないので展開されるvxtwitter.comのリンクを貼るように
 
     if message.author.bot:
         return
@@ -478,7 +478,7 @@ async def vxtwitter(message):
             fixed_urls += f"{fixed_url}\n"
 
     if fixed_urls != "":
-        await message.channel.send(fixed_urls)
+        await message.channel.send(fixed_urls)"""
 
 
 async def end_reaction(message):
