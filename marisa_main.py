@@ -74,7 +74,7 @@ async def on_ready():
         login_notice_ch = client1.get_channel(595072269483638785)
         with open("./datas/version.txt", mode="r", encoding="utf-8") as f:
             version = f.read()
-        await login_notice_ch.send(f"{client1.user.name}がログインしました(from: {where_from})\n{os.path.basename(__file__)}により起動\nversion: {version}")
+        await login_notice_ch.send(f"{client1.user.name}がログインしました(from: {where_from})\n{os.path.basename(__file__)}により起動2\nversion: {version}")
 
     except:
         unexpected_error()
