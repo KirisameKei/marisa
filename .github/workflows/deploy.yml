@@ -18,4 +18,4 @@ jobs:
         host: ${{ secrets.HOST }}
         owner:  ${{ secrets.OWNER }}
       run:
-        ssh -i ~/.ssh/id_rsa -p ${port} ${owner}@${host} "cd /home/${owner}/marisa && git pull origin main && sudo python3 version_up.py"
+        ssh -i ~/.ssh/id_ed25519 -p ${port} ${owner}@${host} "cd /home/${owner}/marisa && git pull origin main && sudo python3 version_up.py"
