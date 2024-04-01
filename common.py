@@ -629,6 +629,7 @@ async def help(message, command, client1):
         help_embed.add_field(name="全サーバ共通の機能", value=common_help, inline=False)
 
         local_command_help = None
+        local_help = None
         if message.guild.id == 585998962050203672: #けい鯖
             local_command_help = "**/break␣MCID**"
             local_command_help += "\n**/build␣MCID**"
