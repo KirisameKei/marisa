@@ -727,6 +727,7 @@ async def count_message(message):
     regular_member_3_role = message.guild.get_role(726246637185531904)
     now = datetime.datetime.now()
     joined_time = message.author.joined_at + datetime.timedelta(hours=9)
+    joined_time = joined_time.replace(tzinfo=None)
 
     if regular_member_3_role in message.author.roles:
         pass
