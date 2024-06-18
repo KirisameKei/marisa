@@ -261,6 +261,17 @@ async def on_message(client1, message, prefix, command):
         #elif command.startswith("tanzaku "):
         #    await limited_time.tanzaku(message, command)
 
+        elif command == "crdall":
+            if message.author.id == 523303776120209408:
+                ch = client1.get_channel(634602609017225225)
+                after = datetime.datetime(2024, 6, 16, 5, 0)
+                before = datetime.datetime(2024, 6, 18, 18, 34, 0)
+                async for msg in ch.history(after=after, before=before):
+                    emoji = client1.get_emoji(636370115444867133)
+                    await msg.add_reaction(emoji)
+                    await login_bonus(msg)
+                    await asyncio.sleep(1.5)
+
     if message.channel.id == 640833025822949387:
         await register_mcid(message, client1)
 
@@ -998,7 +1009,8 @@ async def login_bonus(message):
         kouho_tuple = ("おめでとう！", "はずれ", "はずれ")
         touraku = random.choice(kouho_tuple)
         if touraku == "はずれ":
-            await message.channel.send(touraku)
+            #await message.channel.send(touraku)
+            await message.reply(touraku)
             return
 
         get_pt = random.randint(1,32)
@@ -1021,6 +1033,7 @@ async def login_bonus(message):
     with open("./datas/user_data.json", mode="w", encoding="utf-8") as f:
         f.write(user_data_json)
 
+    #await message.channel.send(f"{touraku}\n{get_pt}ptゲット！\n{message.author.name}の保有pt: {had_pt}→{after_pt}")
     await message.channel.send(f"{touraku}\n{get_pt}ptゲット！\n{message.author.name}の保有pt: {had_pt}→{after_pt}")
 
 
