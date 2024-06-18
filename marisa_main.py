@@ -68,9 +68,12 @@ def unexpected_error(msg=None):
 @client1.event
 async def on_ready():
     try:
-        loop_task.start()
-        change_status.start()
-        kikaku_announcement.start()
+        if not loop_task.is_running():
+            loop_task.start()
+        if not change_status.is_running():
+            change_status.start()
+        if not kikaku_announcement.is_running():
+            kikaku_announcement.start()
         login_notice_ch = client1.get_channel(595072269483638785)
         with open("./datas/version.txt", mode="r", encoding="utf-8") as f:
             version = f.read()
