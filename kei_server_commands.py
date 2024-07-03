@@ -136,12 +136,8 @@ async def accept(message, client1):
     """
     新規役職剥奪用関数"""
 
-    await message.channel.send("check1")
-
     new_role = message.guild.get_role(621641465105481738)
     accept_able_role = message.guild.get_role(626062897633689620)
-
-    await message.channel.send("check2")
 
     if not new_role in message.author.roles:
         await message.channel.send("もう新規役職付いてないよ^^")
@@ -156,8 +152,6 @@ async def accept(message, client1):
         return
 
     mojiretsu = create_pic_capcha()
-
-    await message.channel.send("check3")
     
     connection = MySQLdb.connect(
         host=os.getenv("mysql_host"),
@@ -170,8 +164,6 @@ async def accept(message, client1):
     connection.commit()
     cursor.close()
     connection.close()
-
-    await message.channel.send("check4")
 
     file = discord.File("capcha.png")
     msg = await message.channel.send(
