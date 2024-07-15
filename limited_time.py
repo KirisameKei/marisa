@@ -15,8 +15,7 @@ async def simple_kikaku_join(message):
     if message.author.bot:
         return
 
-    #kikaku_role = message.guild.get_role(668021019700756490) #企画参加者
-    kikaku_role = message.guild.get_role(1186947369783271549) #temp-企画参加者
+    kikaku_role = message.guild.get_role(668021019700756490) #企画参加者
 
     if message.content == "/cancel":
         if kikaku_role in message.author.roles:
