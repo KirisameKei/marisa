@@ -311,7 +311,7 @@ async def seichi_taikai_result(client1):
         kikaku_data_dict = json.load(f)
 
     yesterday = (datetime.date.today() - datetime.timedelta(days=1)).strftime("%Y%m%d")
-    with open(f"../graph_v4/player_data_break_{yesterday}.json", mode="r", encoding="utf-8") as f:
+    with open(f"../graph/player_data_break_{yesterday}.json", mode="r", encoding="utf-8") as f:
         player_data_dict = json.load(f)
 
     rank = 1
