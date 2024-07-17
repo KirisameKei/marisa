@@ -399,10 +399,10 @@ async def seichi_taikai_result(client1):
                 description=description,
                 color=0xffff00
             )
-            notice_ch = client1.get_channel(586420858512343050) #企画についてのお知らせ(本番用)
-            #notice_ch = client1.get_channel(595072269483638785) #1組
+            #notice_ch = client1.get_channel(586420858512343050) #企画についてのお知らせ(本番用)
+            notice_ch = client1.get_channel(595072269483638785) #1組
             if loop == 1:
-                mention = "<@&668021019700756490>" #下にもあるよ、要修正
+                mention = "<@&6680210 19700756490>" #下にもあるよ、要修正
             else:
                 mention=""
             await notice_ch.send(content=mention, embed=embed)
@@ -415,10 +415,10 @@ async def seichi_taikai_result(client1):
             description=description,
             color=0xffff00
         )
-        notice_ch = client1.get_channel(586420858512343050) #企画についてのお知らせ(本番用)
-        #notice_ch = client1.get_channel(595072269483638785) #1組
+        #notice_ch = client1.get_channel(586420858512343050) #企画についてのお知らせ(本番用)
+        notice_ch = client1.get_channel(595072269483638785) #1組
         if loop == 1:
-            mention = "<@&668021019700756490>" #上にもあるよ、要修正
+            mention = "<@&668021 019700756490>" #上にもあるよ、要修正
         else:
             mention=""
         await notice_ch.send(content=mention, embed=embed)
