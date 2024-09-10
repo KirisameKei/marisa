@@ -387,7 +387,8 @@ async def form_link(message, command):
     if command == "report":
         await message.channel.send("https://docs.google.com/forms/d/e/1FAIpQLSfK9DQkUCD2qs8zATUuYIC3JuV3MyXRVCYjMb5g4g_hBUusSA/viewform")
     if command == "failure":
-        await message.channel.send("https://docs.google.com/forms/d/e/1FAIpQLSdn9fTTs55c-oGLT3c68KVTGvfUjTK-W_cdataU7_XyzqcBRg/viewform")
+        #await message.channel.send("https://docs.google.com/forms/d/e/1FAIpQLSdn9fTTs55c-oGLT3c68KVTGvfUjTK-W_cdataU7_XyzqcBRg/viewform")
+        await message.channel.send("https://docs.google.com/forms/d/e/1FAIpQLScVOkjQvHNzdxAyOJvU3mCSPtZhsFFQK7yI1HFlyQRY8M7KMQ/viewform")
     if command == "idea":
         #await message.channel.send("http://w4.minecraftserver.jp/ideaForm")
         await message.channel.send("https://docs.google.com/forms/d/e/1FAIpQLScB-XAHWnYePUpljd6swUfJTn6NJJNn74HgkqifxM7I3oxIMA/viewform")
@@ -406,7 +407,8 @@ async def form_link(message, command):
     if command == "form":
         embed = discord.Embed(title="各フォームへのリンク一覧", color=0xff0000)
         embed.add_field(name="通報フォーム", value="https://docs.google.com/forms/d/e/1FAIpQLSfK9DQkUCD2qs8zATUuYIC3JuV3MyXRVCYjMb5g4g_hBUusSA/viewform", inline=False)
-        embed.add_field(name="不具合フォーム", value="https://docs.google.com/forms/d/e/1FAIpQLSdn9fTTs55c-oGLT3c68KVTGvfUjTK-W_cdataU7_XyzqcBRg/viewform", inline=False)
+        #embed.add_field(name="不具合フォーム", value="https://docs.google.com/forms/d/e/1FAIpQLSdn9fTTs55c-oGLT3c68KVTGvfUjTK-W_cdataU7_XyzqcBRg/viewform", inline=False)
+        embed.add_field(name="不具合フォーム", value="https://docs.google.com/forms/d/e/1FAIpQLScVOkjQvHNzdxAyOJvU3mCSPtZhsFFQK7yI1HFlyQRY8M7KMQ/viewform", inline=False)
         #embed.add_field(name="アイデアフォーム", value="http://w4.minecraftserver.jp/ideaForm", inline=False)
         embed.add_field(name="アイデアフォーム", value="https://docs.google.com/forms/d/e/1FAIpQLScB-XAHWnYePUpljd6swUfJTn6NJJNn74HgkqifxM7I3oxIMA/viewform", inline=False)
         embed.add_field(name="意見・感想フォーム", value="https://docs.google.com/forms/d/e/1FAIpQLSctLrByNvAiQop2lha9Mxn-D5p1OUaOf8JKQJCyAdggGBbzpg/viewform?c=0&w=1", inline=False)
