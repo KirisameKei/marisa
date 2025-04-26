@@ -26,7 +26,7 @@ async def simple_kikaku_join(message):
         return
 
     now = datetime.datetime.now()
-    finish_time = datetime.datetime(2024, 12, 31, 23, 59)
+    finish_time = datetime.datetime(2025, 5, 17, 23, 59)
     if now >= finish_time:
         await message.channel.send("現在企画は行われていません")
         return
@@ -253,6 +253,7 @@ async def complex_kikaku_result(client1):
     guild = client1.get_guild(585998962050203672)
     kikaku_role = guild.get_role(668021019700756490)
     tousen_ninzuu = 10 #当選人数をここに入力
+    give_kosuu = 3200 #ここに総額の個数を入力
     try:
         tousen = random.sample(kikaku_role.members, k=tousen_ninzuu)
     except ValueError:
@@ -266,11 +267,12 @@ async def complex_kikaku_result(client1):
         await ch.send(content="企画参加者は誰一人いませんでした・・・")
         return
 
+    
     price_list = [0] #起点、触るな
     for i in range(tousen_ninzuu-1): #range内は当選人数-1 (ex: 10人が当選のとき9)
-        n = random.randint(0, 2560) #randintの第2引数は総額の個数
+        n = random.randint(0, give_kosuu) #randintの第2引数は総額の個数
         price_list.append(n)
-    price_list.append(2560) #randintの第2引数と同じ値を入れること
+    price_list.append(give_kosuu) #randintの第2引数と同じ値を入れること
     price_list.sort()
 
     give_list = []
@@ -288,7 +290,7 @@ async def complex_kikaku_result(client1):
     embed = discord.Embed(title=":tada:おめでとう:tada:", description=description, color=0xffff00)
     ch = client1.get_channel(586420858512343050) #企画お知らせ
     #ch = client1.get_channel(595072269483638785) #1組
-    await ch.send(content="<@&668021019700756490>", embed=embed)
+    await ch.send(content="<@ &668021019700756490>", embed=embed)
     await ch.send(
         "**受け取り期日は2023/10/17までとします\n"
         "**当選者で事情により期限内に受け取れない場合は期限内に言っていただければ対応します。\n"
