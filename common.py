@@ -504,7 +504,7 @@ async def change_prefix(message):
         await message.channel.send("このコマンドは管理者のみが使用できます")
         return
 
-    prefix = message.content.split()[1]
+    prefix = message.content.split()[2]
     if prefix.startswith("//"):
         await message.channel.send("本botの別機能と競合するため「//」で始まるプレフィックスは使用できません")
         return
