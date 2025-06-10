@@ -38,7 +38,7 @@ async def on_message(client1, message, prefix, command):
             await commands.info(client1, message, command)
 
         elif command.startswith("random "):
-            await commands.random_commands(message, command)
+            await commands.random_command(message, command)
 
         elif command.startswith("weather "):
             await commands.weather(message, command)
