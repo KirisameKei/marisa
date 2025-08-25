@@ -121,7 +121,7 @@ async def seichi_taikai_join(message):
         return
 
     now = datetime.datetime.now()
-    finish_time = datetime.datetime(2024, 8, 17, 23, 55)
+    finish_time = datetime.datetime(2025, 9, 13, 23, 55)
     if now >= finish_time:
         await message.channel.send("参加締め切り時刻を過ぎています")
         return
@@ -292,7 +292,7 @@ async def complex_kikaku_result(client1):
     #ch = client1.get_channel(595072269483638785) #1組
     await ch.send(content="<@ &668021019700756490>", embed=embed)
     await ch.send(
-        "**受け取り期日は2023/10/17までとします\n"
+        "**受け取り期日は2025/6/17までとします\n"
         "**当選者で事情により期限内に受け取れない場合は期限内に言っていただければ対応します。\n"
         "受け取り辞退をする場合<#665487669953953804>にて`/cancel`をしてください。"
     )
