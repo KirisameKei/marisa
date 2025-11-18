@@ -210,38 +210,37 @@ async def simple_kikaku_result(client1):
     kikaku_role = guild.get_role(668021019700756490)
     
     try:
-        tousen = random.sample(kikaku_role.members, k=5) #kは当選人数
+        tousen = random.sample(kikaku_role.members, k=4) #kは当選人数
     except ValueError:
         tousen = kikaku_role.members
 
     tousen_role = guild.get_role(669720120314167307)
 
-#    #複数人同条件の当選者がいるとき用
-#    description = ""
-#    for mem in tousen:
-#        await mem.add_roles(tousen_role)
-#        description += f"{mem.mention}\n"
-
-    #条件の違う当選者がいるとき用
-    description = (
-        f"1等: {tousen[0].mention}\n"
-        f"2等: {tousen[1].mention}, {tousen[2].mention}"
-    )
+    #複数人同条件の当選者がいるとき用
+    description = ""
     for mem in tousen:
         await mem.add_roles(tousen_role)
+        description += f"{mem.mention}\n"
+
+    #条件の違う当選者がいるとき用
+#    description = (
+#        f"1等: {tousen[0].mention}\n"
+#        f"2等: {tousen[1].mention}, {tousen[2].mention}"
+#    )
+#    for mem in tousen:
+#        await mem.add_roles(tousen_role)
 
     #当選者が1人しかいないとき用
-    description = f"当選者: {tousen[0].mention}"
-    await tousen[0].add_roles(tousen_role)
+#    description = f"当選者: {tousen[0].mention}"
+#    await tousen[0].add_roles(tousen_role)
 
     embed = discord.Embed(title=":tada:おめでとう:tada:", description=description, color=0xffff00)
     ch = client1.get_channel(586420858512343050)
     await ch.send(content="<@&668021019700756490>", embed=embed)
     await ch.send(
-#        "**受け取り期日は2025/1/31までとします\n"
-        "**受け取り期日は鯖復活後告知します**\n"
-#        "**当選者で事情により期限内に受け取れない場合は期限内に言っていただければ対応します。\n"
-#        "kirisamekei都合で受け渡しができない可能性があります。その際は受け取り期限を延長/廃止します。\n"
+        "**受け取り期日は2025/12/24までとします**\n"
+        "当選者で事情により期限内に受け取れない場合は期限内に言っていただければ対応します。\n"
+        "kirisamekei都合で受け渡しができない可能性があります。その際は受け取り期限を延長/廃止します。\n"
         "参加賞を受け取り希望の方は<#597130965927723048>にそれとわかるメッセージを送信してください。\n"
         "受け取り辞退をする場合<#665487669953953804>にて`/cancel`をしてください。"
     )
