@@ -454,8 +454,7 @@ async def jms_notice(client1):
 
     await ch.send(
         "<@&673349311228280862>\n"
-        "https://minecraft.jp/servers/54d3529e4ddda180780041a7/vote\n"
-        "https://monocraft.net/servers/Cf3BffNIRMERDNbAfWQm\n\n"
+        "https://minecraft.jp/servers/54d3529e4ddda180780041a7/vote\n\n"
         "https://minecraftservers.org/server/575658"
     )
 
