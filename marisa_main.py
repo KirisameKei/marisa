@@ -567,8 +567,8 @@ async def kikaku_announcement():
         now = datetime.datetime.now()
 
         if now.month == 1 and now.day == 1 and now.hour == 0 and now.minute == 0:
-            await limited_time.simple_kikaku_result(client1) #応募者の中からn人選ぶシンプルな企画
-            #await limited_time.complex_kikaku_result(client1) #総額いくらを当選人数人でランダムに分配する企画
+            #await limited_time.simple_kikaku_result(client1) #応募者の中からn人選ぶシンプルな企画
+            await limited_time.complex_kikaku_result(client1) #総額いくらを当選人数人でランダムに分配する企画
             #await limited_time.seichi_taikai_result(client1) #整地大会用の企画
     except:
         unexpected_error()

@@ -253,7 +253,7 @@ async def complex_kikaku_result(client1):
     guild = client1.get_guild(585998962050203672)
     kikaku_role = guild.get_role(668021019700756490)
     tousen_ninzuu = 10 #当選人数をここに入力
-    give_kosuu = 3200 #ここに総額の個数を入力
+    give_kosuu = 3840 #ここに総額の個数を入力
     try:
         tousen = random.sample(kikaku_role.members, k=tousen_ninzuu)
     except ValueError:
