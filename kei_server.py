@@ -258,8 +258,8 @@ async def on_message(client1, message, prefix, command):
             #通知chを魔理沙からのお知らせとする
             await kei_server_commands.leave_guild(message, client1, command)
 
-        #elif command.startswith("tanzaku "):
-        #    await limited_time.tanzaku(message, command)
+        elif command.startswith("tanzaku "):
+            await limited_time.tanzaku(message, command)
 
     if message.channel.id == 640833025822949387:
         await register_mcid(message, client1)
@@ -672,9 +672,9 @@ async def marichan_birthday(client1):
     embed = discord.Embed(
         title="Happy Birthday!!:tada:",
         description=(
-            "本日、6月28日は魔理沙bot生誕六周年です。\n"
-            "記念に現時刻から23:59(botの指示による)までに本サーバで「ガチャ券を寄こせ」と言うとガチャ券を6st進呈します。\n"
-            "(インできる時間が合わない場合mineでpayする可能性があります)\n"
+            "本日、6月28日は魔理沙bot生誕七周年です。\n"
+            "記念に現時刻から23:59(botの指示による)までに本サーバで「ガチャ券を寄こせ」と言うとガチャ券を7st進呈します。\n"
+            "(インできる時間が合わない場合寄付箱への配達とする可能性があります)\n"
             "(文字は正確に打ちましょう、検索に引っかからないと対象になりません)"
         ),
         color=0xffff00
