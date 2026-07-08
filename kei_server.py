@@ -258,8 +258,8 @@ async def on_message(client1, message, prefix, command):
             #通知chを魔理沙からのお知らせとする
             await kei_server_commands.leave_guild(message, client1, command)
 
-        elif command.startswith("tanzaku "):
-            await limited_time.tanzaku(message, command)
+        #elif command.startswith("tanzaku "):
+        #    await limited_time.tanzaku(message, command)
 
     if message.channel.id == 640833025822949387:
         await register_mcid(message, client1)
