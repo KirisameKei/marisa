@@ -26,7 +26,7 @@ async def simple_kikaku_join(message):
         return
 
     now = datetime.datetime.now()
-    finish_time = datetime.datetime(2025, 12, 31, 23, 59)
+    finish_time = datetime.datetime(2026, 7, 31, 23, 59)
     if now >= finish_time:
         await message.channel.send("現在企画は行われていません")
         return
@@ -292,7 +292,7 @@ async def complex_kikaku_result(client1):
     #ch = client1.get_channel(595072269483638785) #1組
     await ch.send(content="<@ &668021019700756490>", embed=embed)
     await ch.send(
-        "**受け取り期日は2025/6/17までとします\n"
+        "**受け取り期日は2026/08/31までとします\n"
         "**当選者で事情により期限内に受け取れない場合は期限内に言っていただければ対応します。\n"
         "受け取り辞退をする場合<#665487669953953804>にて`/cancel`をしてください。"
     )
