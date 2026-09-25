@@ -121,7 +121,7 @@ async def seichi_taikai_join(message):
         return
 
     now = datetime.datetime.now()
-    finish_time = datetime.datetime(2025, 10, 24, 23, 55)
+    finish_time = datetime.datetime(2026, 10, 24, 23, 55)
     if now >= finish_time:
         await message.channel.send("参加締め切り時刻を過ぎています")
         return
